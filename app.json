@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sokhra-ReactNative",
-    "slug": "sokhra-ReactNative",
+    "name": "sokhra",
+    "slug": "sokhra",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
