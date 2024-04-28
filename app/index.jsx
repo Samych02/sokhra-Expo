@@ -3,8 +3,9 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import Lottie from "lottie-react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {router} from "expo-router";
+import DynamicSafeAreaView from "../components/DynamicSafeAreaView";
 
-const width = Dimensions.get("window").width;
+const {width, height} = Dimensions.get("window");
 const slides = [
   {
     title: "Bienvenue à Sokhra !",
@@ -30,8 +31,7 @@ const slides = [
 export default function App() {
   const _renderItem = ({item}) => {
     return (
-        <View className="w-full h-full flex-col justify-center items-center">
-          <View style={{flex: 1}}></View>
+        <View className="w-full justify-center items-center" style={{marginTop: height * 0}}>
           <Lottie
               source={item.image}
               autoPlay={true}
@@ -39,10 +39,9 @@ export default function App() {
               style={{width: width * 0.9, height: width}}
               resizeMode="contain"
           />
-          <View style={{flex: 1}}></View>
-          <Text className="text-2xl text-black font-pextrabold text-center px-1.5">{item.title}</Text>
-          <Text className="text-sm font-pregular mt-7 text-center px-4" numberOfLines={5}>{item.text}</Text>
-          <View style={{flex: 3}}></View>
+          <Text className="text-2xl text-black font-pextrabold text-center px-1.5"
+                style={{marginTop: height * 0.02}}>{item.title}</Text>
+          <Text className="text-sm font-pregular text-center px-4 mt-2">{item.text}</Text>
         </View>
     )
   }
@@ -66,8 +65,8 @@ export default function App() {
               }}
           />
         </View>
-    );
-  };
+    )
+  }
   const _renderDoneButton = () => {
     return (
         <View style={{
@@ -92,7 +91,7 @@ export default function App() {
 
 
   return (
-      <SafeAreaView className="bg-primary h-full">
+      <DynamicSafeAreaView className="h-full bg-primary">
         <AppIntroSlider
             data={slides}
             renderItem={_renderItem}
@@ -102,6 +101,6 @@ export default function App() {
             activeDotStyle={{backgroundColor: "#BD965B", width: width * 0.08}}
             dotStyle={{backgroundColor: "#222325", width: width * 0.027}}
         />
-      </SafeAreaView>
+      </DynamicSafeAreaView>
   );
 }
