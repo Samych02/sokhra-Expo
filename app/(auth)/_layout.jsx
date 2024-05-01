@@ -3,12 +3,10 @@ import {Stack} from "expo-router";
 
 const AuthLayout = () => {
 
-  return (
-      <Stack>
+  return (<Stack>
         <Stack.Screen name="login" options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="otp" options={{headerShown: false}}></Stack.Screen>
-      </Stack>
-  );
+      </Stack>);
 };
 
 export default AuthLayout;

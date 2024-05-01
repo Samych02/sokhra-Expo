@@ -1,28 +1,59 @@
 import React, {useState} from 'react'
-import {ActivityIndicator, Alert, Dimensions, Text, TouchableOpacity, View} from 'react-native'
-import PhoneNumberField from "../../components/PhoneNumberField";
+import {ActivityIndicator, Alert, Text, TouchableOpacity, View} from 'react-native'
+import {useLocalSearchParams} from 'expo-router'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 import {height} from "../../constants/dimmesions";
+import {OtpInput} from "react-native-otp-entry";
+import COLORS from "../../constants/colors";
 
 const otp = () => {
 
 
+  const {parsedPhoneNumber} = useLocalSearchParams()
+  const [numberOfSeconds, setNumberOfSeconds] = useState(30)
+  const [loading, setLoading] = useState(false);
+
+  const handlePress = () => {
+    setNumberOfSeconds(60)
+    Alert.alert("Un nouveau code à été envoyé")
+  }
+  if (numberOfSeconds >= 0) {
+    setTimeout(() => setNumberOfSeconds(numberOfSeconds - 1), 1000);
+  }
+
   return (
+
       <DynamicSafeAreaView className="h-full bg-primary">
         <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Saisissez le code</Text>
-        <Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé à </Text>
-        <View className="mx-3">
-          <TouchableOpacity className="justify-center items-center w-full h-11 bg-secondary rounded-md"
-                            style={{marginBottom: 25}} onPress>
-            {/*{loading ? <ActivityIndicator size="large" color="white"/> :*/}
-            <Text className="text-white font-pmedium text-lg">Envoyer le code</Text>
-          </TouchableOpacity>
+        <Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé
+          à {parsedPhoneNumber.replace(" ", "\u00A0")}</Text>
+        <View className="mx-5 mb-10">
+
+          <OtpInput
+              numberOfDigits={4}
+              focusColor={COLORS.secondary}
+              hideStick
+              theme={{
+                pinCodeContainerStyle: {
+                  backgroundColor: "white", width: 60, height: 60,
+                }, focusedPinCodeContainerStyle: {
+                  borderWidth: 3,
+                }, pinCodeTextStyle: {
+                  fontWeight: "bold"
+                }
+              }}
+          />
         </View>
-        <Text style={{fontSize: 11}} className="text-black font-pextralight mx-4 text-center">L'adhésion à notre
-          application signifie que vous acceptez nos <Text className="underline">Conditions d'utilisation</Text> et
-          notre <Text className="underline">Politique de confidentialité</Text></Text>
-      </DynamicSafeAreaView>
-  )
+        {numberOfSeconds >= 0 &&
+            <Text className="mx-5 text-center justify-center font-pmedium text-lg">Vous pouvez demander un code à
+              nouveau dans {numberOfSeconds} s</Text>}
+        {numberOfSeconds < 0 &&
+            <TouchableOpacity className="mx-4 justify-center items-center  h-11 bg-secondary rounded-md"
+                              style={{marginBottom: 25}} onPress={handlePress}>
+              {loading ? <ActivityIndicator size="large" color="white"/> :
+                  <Text className="text-white font-pmedium text-lg">Renvoyer le code</Text>}
+            </TouchableOpacity>}
+      </DynamicSafeAreaView>)
 }
 
 export default otp

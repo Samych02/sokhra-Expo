@@ -4,6 +4,8 @@ import PhoneNumberField from "../../components/PhoneNumberField";
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 import {height} from "../../constants/dimmesions";
 import validatePhoneNumber from "../utils/validatePhoneNumber";
+import parseValidePhoneNumber from "../utils/parseValidePhoneNumber";
+import {router} from "expo-router";
 
 const login = () => {
   const [countryCode, setCountryCode] = useState(null)
@@ -12,7 +14,7 @@ const login = () => {
 
   const handlePress = () => {
     if (nationalNumber === "") {
-      return Alert.alert("Veuillez entrer votre numéro de téléphone nn")
+      return Alert.alert("Veuillez entrer votre numéro de téléphone")
     }
     setLoading(true)
     const flag = validatePhoneNumber(countryCode.cca2, nationalNumber)
@@ -20,24 +22,11 @@ const login = () => {
     if (!flag) {
       return Alert.alert("Numéro de téléphone invalide")
     }
-    return Alert.alert("ok")
+    const parsedPhoneNumber = parseValidePhoneNumber(countryCode.cca2, nationalNumber)
+    router.navigate({pathname: "/otp", params: {parsedPhoneNumber: parsedPhoneNumber}})
   }
-  // const handlePress = async () => {
-  //   if (nationalNumber === "") {
-  //     return Alert.alert("Veuillez entrer votre numéro de téléphone")
-  //   }
-  //   setLoading(true)
-  //   const flag = await validatePhoneNumber(countryCode, nationalNumber).then(() => setLoading(false))
-  //   if (!flag) {
-  //     return Alert.alert("Numéro de téléphone invalide")
-  //   }
-  //   return Alert.alert("ok")
-  // }
 
-
-
-  return (
-      <DynamicSafeAreaView className="h-full bg-primary">
+  return (<DynamicSafeAreaView className="h-full bg-primary">
         <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Indiquez votre
           numéro</Text>
         <Text className="text-center font-pregular mx-10 mb-10">Nous vous enverrons un code pour vérifier votre
@@ -54,8 +43,7 @@ const login = () => {
         <Text style={{fontSize: 11}} className="text-black font-pextralight mx-4 text-center">L'adhésion à notre
           application signifie que vous acceptez nos <Text className="underline">Conditions d'utilisation</Text> et
           notre <Text className="underline">Politique de confidentialité</Text></Text>
-      </DynamicSafeAreaView>
-  )
+      </DynamicSafeAreaView>)
 }
 
 export default login
