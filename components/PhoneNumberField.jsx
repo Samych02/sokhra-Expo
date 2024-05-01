@@ -1,24 +1,23 @@
 import PhoneInput from "react-native-international-phone-number";
-import React, {useState} from "react";
+import React from "react";
 
-const PhoneNumberInput = () => {
-  const [selectedCountry, setSelectedCountry] = useState(null)
-  const [inputValue, setInputValue] = useState('')
 
-  function handleInputValue(phoneNumber) {
-    setInputValue(phoneNumber);
+const PhoneNumberField = ({nationalNumber, setNationalNumber, countryCode, setCountryCode}) => {
+
+  function handleNationalNumber(nationalNumber) {
+    setNationalNumber(nationalNumber);
   }
 
-  function handleSelectedCountry(country) {
-    setSelectedCountry(country);
+  function handleCountryCode(countryCode) {
+    setCountryCode(countryCode);
   }
 
   return (
       <PhoneInput
-          value={inputValue}
-          onChangePhoneNumber={handleInputValue}
-          selectedCountry={selectedCountry}
-          onChangeSelectedCountry={handleSelectedCountry}
+          value={nationalNumber}
+          onChangePhoneNumber={handleNationalNumber}
+          selectedCountry={countryCode}
+          onChangeSelectedCountry={handleCountryCode}
           language="fr"
           defaultCountry="MA"
           placeholder=""
@@ -63,4 +62,4 @@ const PhoneNumberInput = () => {
       />
   )
 }
-export default PhoneNumberInput;
+export default PhoneNumberField;

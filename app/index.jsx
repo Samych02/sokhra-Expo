@@ -1,11 +1,13 @@
-import {Dimensions, SafeAreaView, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import Lottie from "lottie-react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {router} from "expo-router";
+import {Redirect, router} from "expo-router";
 import DynamicSafeAreaView from "../components/DynamicSafeAreaView";
+import {height, width} from "../constants/dimmesions";
+import {getItem, setItem} from "./utils/asyncStorage";
+import {useEffect, useState} from "react";
 
-const {width, height} = Dimensions.get("window");
 const slides = [
   {
     title: "Bienvenue à Sokhra !",
@@ -28,10 +30,20 @@ const slides = [
   }
 ]
 
-export default function App() {
+const App = () => {
+  const [skipOnboardingScreen, setSkipOnboardingScreen] = useState(false)
+  const checkIfAlreadyOnboarded = async () => {
+    if (await getItem("SkipOnboardingScreen")) {
+      setSkipOnboardingScreen(true)
+    }
+  }
+  useEffect(() => {
+    checkIfAlreadyOnboarded()
+  }, [])
+
   const _renderItem = ({item}) => {
     return (
-        <View className="w-full justify-center items-center" style={{marginTop: height * 0}}>
+        <View className="w-full justify-center items-center">
           <Lottie
               source={item.image}
               autoPlay={true}
@@ -86,9 +98,12 @@ export default function App() {
               }}
           />
         </View>
-    );
-  };
+    )
+  }
 
+  if (skipOnboardingScreen) {
+    return <Redirect href="/otp"/>
+  }
 
   return (
       <DynamicSafeAreaView className="h-full bg-primary">
@@ -97,10 +112,14 @@ export default function App() {
             renderItem={_renderItem}
             renderNextButton={_renderNextButton}
             renderDoneButton={_renderDoneButton}
-            onDone={() => router.replace("/login",)}
+            onDone={() => {
+              setItem("SkipOnboardingScreen", "1")
+              router.push("/login1",)
+            }}
             activeDotStyle={{backgroundColor: "#BD965B", width: width * 0.08}}
             dotStyle={{backgroundColor: "#222325", width: width * 0.027}}
         />
       </DynamicSafeAreaView>
-  );
+  )
 }
+export default App
