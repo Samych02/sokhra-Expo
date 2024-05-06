@@ -86,9 +86,9 @@ const App = () => {
     </View>)
   }
 
-  // if (skipOnboardingScreen) {
-  //   return <Redirect href="/login"/>
-  // }
+  if (skipOnboardingScreen) {
+    return <Redirect href="/login"/>
+  }
 
   return (<DynamicSafeAreaView className="h-full bg-primary">
     <AppIntroSlider
