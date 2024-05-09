@@ -1,29 +1,22 @@
-import DynamicSafeAreaView from "../components/DynamicSafeAreaView";
 import {getItem} from "./utils/asyncStorage";
 import {useEffect, useState} from "react";
-import Onboarding from "../components/Onboarding";
-import slides from "../assets/onboarding/slides.js";
 import {Redirect} from "expo-router";
 
 const App = () => {
-  const [skipOnboardingScreen, setSkipOnboardingScreen] = useState(false)
-  const checkIfAlreadyOnboarded = async () => {
-    if (await getItem("SkipOnboardingScreen")) {
-      setSkipOnboardingScreen(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const checkIfLoggedIn = async () => {
+    if (await getItem("isLoggedIn")) {
+      setIsLoggedIn(true)
     }
   }
   useEffect(() => {
-    checkIfAlreadyOnboarded()
+    checkIfLoggedIn()
   }, [])
 
-  if (skipOnboardingScreen) {
-    return <Redirect href="/login"/>
+  if (isLoggedIn) {
+    return <Redirect href="/inbox"/>
   }
+  return <Redirect href="/login"/>
 
-  return (
-      <DynamicSafeAreaView className="h-full bg-primary">
-        <Onboarding slides={slides}/>
-      </DynamicSafeAreaView>
-  )
 }
 export default App

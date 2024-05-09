@@ -7,7 +7,6 @@ import {OtpInput} from "react-native-otp-entry";
 import COLORS from "../../constants/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import auth from "@react-native-firebase/auth";
-import {log} from "expo/build/devtools/logger";
 import confirmStore from "../../store/confirmStore";
 
 const otp = () => {
@@ -51,8 +50,8 @@ const otp = () => {
           />
         </TouchableOpacity>
         <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Saisissez le code</Text>
-        {/*<Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé*/}
-        {/*  à {parsedPhoneNumber.replace(" ", "\u00A0")}</Text>*/}
+        <Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé
+          à {parsedPhoneNumber.replace(" ", "\u00A0")}</Text>
         <View className="mx-5 mb-10">
 
           <OtpInput
