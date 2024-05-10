@@ -40,11 +40,13 @@ const otp = () => {
   return (<DynamicSafeAreaView className="h-full bg-white">
     <TouchableOpacity onPress={() => {
       router.navigate("/login")
+    }} style={{
+      backgroundColor: COLORS.fgrey, borderRadius: 20, width: 40, height: 40, marginLeft: 15, justifyContent: "center"
     }}>
       <Ionicons
-          name="arrow-back-circle-outline"
+          name="chevron-back"
           style={{
-            marginLeft: 15, fontSize: 40, color: COLORS.cgrey,
+            fontSize: 35, color: COLORS.cgrey
           }}
       />
     </TouchableOpacity>
