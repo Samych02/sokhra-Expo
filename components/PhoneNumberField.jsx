@@ -29,9 +29,9 @@ const PhoneNumberField = ({nationalNumber, setNationalNumber, countryCode, setCo
             }, caret: {
               color: COLORS.cgrey, fontSize: 15, marginEnd: 30
             }, callingCode: {
-              color: "black", fontSize: 20
+              color: "black", fontSize: 20, fontWeight:"bold"
             }, input: {
-              color: "black", fontSize: 20
+              color: "black", fontSize: 20, fontWeight:"bold",
             },
           }}
           modalStyles={{

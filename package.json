@@ -38,6 +38,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-elements": "^3.4.3",
     "react-native-international-phone-number": "^0.7.6",
     "react-native-onboard": "^2.6.0",
     "react-native-onboarding-swiper": "^1.2.0",
