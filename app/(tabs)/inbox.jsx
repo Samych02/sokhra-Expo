@@ -1,12 +1,11 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import {Text} from 'react-native'
+import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 
 const Inbox = () => {
-  return (
-      <View>
-        <Text> Inbox </Text>
-      </View>
-  )
+  return (<DynamicSafeAreaView className="h-full bg-white">
+        <Text>inbox</Text>
+      </DynamicSafeAreaView>)
 }
 
 export default Inbox

@@ -15,7 +15,7 @@ const otp = () => {
   const {parsedPhoneNumber} = useLocalSearchParams()
   const [numberOfSeconds, setNumberOfSeconds] = useState(30)
   const [loading, setLoading] = useState(false)
-  const { confirm, setConfirm } = confirmStore();
+  const {confirm, setConfirm} = confirmStore();
 
 
   const confirmCode = async (code) => {
@@ -37,49 +37,47 @@ const otp = () => {
     setTimeout(() => setNumberOfSeconds(numberOfSeconds - 1), 1000);
   }
 
-  return (
-      <DynamicSafeAreaView className="h-full bg-primary">
-        <TouchableOpacity onPress={() => {
-          router.navigate("/login")
-        }}>
-          <Ionicons
-              name="arrow-back-circle-outline"
-              style={{
-                marginLeft: 15, fontSize: 40, color: COLORS.secondary,
-              }}
-          />
-        </TouchableOpacity>
-        <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Saisissez le code</Text>
-        <Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé
-          à {parsedPhoneNumber.replace(" ", "\u00A0")}</Text>
-        <View className="mx-5 mb-10">
+  return (<DynamicSafeAreaView className="h-full bg-white">
+    <TouchableOpacity onPress={() => {
+      router.navigate("/login")
+    }}>
+      <Ionicons
+          name="arrow-back-circle-outline"
+          style={{
+            marginLeft: 15, fontSize: 40, color: COLORS.cgrey,
+          }}
+      />
+    </TouchableOpacity>
+    <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Saisissez le code</Text>
+    {/*<Text className="text-center font-pregular mx-10 mb-10">Un code de vérification a été envoyé*/}
+    {/*  à {parsedPhoneNumber.replace(" ", "\u00A0")}</Text>*/}
+    <View className="mx-4 mb-10">
 
-          <OtpInput
-              numberOfDigits={6}
-              focusColor={COLORS.secondary}
-              hideStick
-              theme={{
-                pinCodeContainerStyle: {
-                  backgroundColor: "white", width: 50, height: 50,
-                }, focusedPinCodeContainerStyle: {
-                  borderWidth: 3,
-                }, pinCodeTextStyle: {
-                  fontWeight: "bold"
-                }
-              }}
-              onFilled={(code)=>confirmCode(code)}
-          />
-        </View>
-        {numberOfSeconds >= 0 &&
-            <Text className="mx-5 text-center justify-center font-pmedium text-lg">Vous pouvez demander un code à
-              nouveau dans {numberOfSeconds} s</Text>}
-        {numberOfSeconds < 0 &&
-            <TouchableOpacity className="mx-4 justify-center items-center  h-11 bg-secondary rounded-md"
-                              style={{marginBottom: 25}} onPress={handlePress}>
-              {loading ? <ActivityIndicator size="large" color="white"/> :
-                  <Text className="text-white font-pmedium text-lg">Renvoyer le code</Text>}
-            </TouchableOpacity>}
-      </DynamicSafeAreaView>)
+      <OtpInput
+          numberOfDigits={6}
+          focusColor={COLORS.cgrey}
+          hideStick
+          theme={{
+            pinCodeContainerStyle: {
+              backgroundColor: COLORS.fgrey, width: 52, height: 52, borderWidth: 0,
+            }, focusedPinCodeContainerStyle: {
+              borderWidth: 3,
+            }, pinCodeTextStyle: {
+              fontWeight: "bold"
+            }
+          }}
+          onFilled={(code) => confirmCode(code)}
+      />
+    </View>
+    {numberOfSeconds >= 0 &&
+        <Text className="mx-5 text-center justify-center font-pmedium text-lg">Vous pouvez demander un code à
+          nouveau dans {numberOfSeconds} s</Text>}
+    {numberOfSeconds < 0 && <TouchableOpacity className="mx-4 justify-center items-center  h-11 bg-brand rounded-md"
+                                              style={{marginBottom: 25}} onPress={handlePress}>
+      {loading ? <ActivityIndicator size="large" color="white"/> :
+          <Text className="text-white font-pmedium text-lg">Renvoyer le code</Text>}
+    </TouchableOpacity>}
+  </DynamicSafeAreaView>)
 }
 
 export default otp

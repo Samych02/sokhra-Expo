@@ -14,9 +14,9 @@ const App = () => {
   }, [])
 
   if (isLoggedIn) {
-    return <Redirect href="/inbox"/>
+    return <Redirect href="/listings"/>
   }
-  return <Redirect href="/login"/>
+  return <Redirect href="/listings"/>
 
 }
 export default App

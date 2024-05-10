@@ -13,7 +13,7 @@ const login = () => {
   const [countryCode, setCountryCode] = useState(null)
   const [nationalNumber, setNationalNumber] = useState("")
   const [loading, setLoading] = useState(false)
-  const { confirm, setConfirm } = confirmStore();
+  const {confirm, setConfirm} = confirmStore();
 
   const loginWithPhoneNumber = async (phoneNumber) => {
     const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
@@ -37,15 +37,15 @@ const login = () => {
     router.navigate({pathname: "/otp", params: {parsedPhoneNumber: parsedPhoneNumber}})
   }
 
-  return (<DynamicSafeAreaView className="h-full bg-primary">
-    <Text className="text-center font-psemibold text-2xl" style={{marginTop: height * 0.1}}>Indiquez votre
+  return (<DynamicSafeAreaView className="h-full bg-white">
+    <Text className="text-center font-pbold text-2xl" style={{marginTop: height * 0.1}}>Indiquez votre
       numéro</Text>
     <Text className="text-center font-pregular mx-10 mb-10">Nous vous enverrons un code pour vérifier votre
       téléphone</Text>
     <View className="mx-3">
       <PhoneNumberField nationalNumber={nationalNumber} setNationalNumber={setNationalNumber}
                         countryCode={countryCode} setCountryCode={setCountryCode}/>
-      <TouchableOpacity className="justify-center items-center w-full h-11 bg-secondary rounded-md"
+      <TouchableOpacity className="justify-center items-center w-full h-11 bg-brand rounded-md"
                         style={{marginBottom: 25}} onPress={handlePress}>
         {loading ? <ActivityIndicator size="large" color="white"/> :
             <Text className="text-white font-pmedium text-lg">Envoyer le code</Text>}

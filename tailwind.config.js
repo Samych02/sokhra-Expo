@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#DFD5CB",
-        secondary: "#BD965B",
-        dgrey: "#222325"
+        brand: "#BD965B",
+        fgrey: "#F0F2F5",
+        cgrey: "#65676B"
       },
       fontFamily: {
         pthin: ["Poppins-Thin"],

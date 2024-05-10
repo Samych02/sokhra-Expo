@@ -2,10 +2,10 @@ import React from 'react'
 import {Text} from 'react-native'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 
-const Trips = () => {
+const Settings = () => {
   return (<DynamicSafeAreaView className="h-full bg-white">
-        <Text>trips</Text>
-      </DynamicSafeAreaView>)
+    <Text>settings</Text>
+  </DynamicSafeAreaView>)
 }
 
-export default Trips
+export default Settings

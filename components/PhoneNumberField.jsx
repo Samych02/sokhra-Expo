@@ -1,5 +1,6 @@
 import PhoneInput from "react-native-international-phone-number";
 import React from "react";
+import COLORS from "../constants/colors";
 
 
 const PhoneNumberField = ({nationalNumber, setNationalNumber, countryCode, setCountryCode}) => {
@@ -12,8 +13,7 @@ const PhoneNumberField = ({nationalNumber, setNationalNumber, countryCode, setCo
     setCountryCode(countryCode);
   }
 
-  return (
-      <PhoneInput
+  return (<PhoneInput
           value={nationalNumber}
           onChangePhoneNumber={handleNationalNumber}
           selectedCountry={countryCode}
@@ -22,44 +22,27 @@ const PhoneNumberField = ({nationalNumber, setNationalNumber, countryCode, setCo
           defaultCountry="MA"
           placeholder=""
           phoneInputStyles={{
-            divider: {display: "none"},
-            flagContainer: {
-              backgroundColor: "white",
-              paddingEnd: 0
-            },
-            container: {
-              borderWidth: 0,
-              backgroundColor: "white",
-              marginBottom: 25
-            },
-            caret: {
-              color: "#222325",
-              fontSize: 15,
-              marginEnd: 30
-            },
-            callingCode: {
-              color: "#222325",
-              fontSize: 20
-            },
-            input: {
-              color: "#222325",
-              fontSize: 20
+            divider: {display: "none"}, flagContainer: {
+              backgroundColor: COLORS.fgrey, paddingEnd: 0
+            }, container: {
+              borderWidth: 0, backgroundColor: COLORS.fgrey, marginBottom: 25
+            }, caret: {
+              color: COLORS.cgrey, fontSize: 15, marginEnd: 30
+            }, callingCode: {
+              color: "black", fontSize: 20
+            }, input: {
+              color: "black", fontSize: 20
             },
           }}
           modalStyles={{
             modal: {
-              backgroundColor: '#DFD5CB',
-            },
-            searchInput: {
-              borderWidth: 2,
-              borderColor: "#BD965B",
-            },
-            countryButton: {
-              borderWidth: 1,
-              borderColor: "#BD965B",
+              backgroundColor: "white",
+            }, searchInput: {
+              backgroundColor: COLORS.fgrey, borderWidth: 0,
+            }, countryButton: {
+              borderWidth: 0, borderColor: COLORS.fgrey,
             }
           }}
-      />
-  )
+      />)
 }
 export default PhoneNumberField;
