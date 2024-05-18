@@ -13,7 +13,6 @@ const App = () => {
     } catch (e) {
     }
 
-    console.log((await getItem("isLoggedIn")) != null)
     if ((await getItem("isLoggedIn")) != null) {
       setIsLoggedIn(true)
       return

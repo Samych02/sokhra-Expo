@@ -4,14 +4,15 @@ import {Text, View} from "react-native"
 import COLORS from "../../constants/colors"
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-const TabBarIcon = (color, focused, title, icon) => {
+const TabBarIcon = (color, focused, title, icon, focusedIcon) => {
   return (<View className="items-center justify-center content-center w-full h-full">
     {focused && <View className="w-full absolute top-0 bg-brand" style={{
       height: 2, borderBottomRightRadius: 4, borderBottomLeftRadius: 4,
     }}></View>}
 
+
     <MaterialCommunityIcons
-        name={focused ? icon : icon + "-outline"}
+        name={focused ? focusedIcon : icon}
         color={color}
         size={35}
     />
@@ -41,23 +42,35 @@ const TabLayout = () => {
 
         }}
     >
+
       <Tabs.Screen
           name="listings"
           options={{
             title: "Annonces", // headerShown: false,
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Annonces", "map-search")),
+            tabBarIcon: ({
+                           color,
+                           focused
+                         }) => (TabBarIcon(color, focused, "Annonces", "map-search-outline", "map-search")),
+          }}
+      />
+      <Tabs.Screen
+          name="shipments"
+          options={{
+            title: "Expéditions",
+            tabBarIcon: ({
+                           color,
+                           focused
+                         }) => (TabBarIcon(color, focused, "Expéditions", "package-variant-closed", "package-variant")),
           }}
       />
       <Tabs.Screen
           name="trips"
           options={{
-            title: "Voyages", tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Voyages", "truck-fast")),
-          }}
-      />
-      <Tabs.Screen
-          name="tracking"
-          options={{
-            title: "Suivi", tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Suivi", "inbox-multiple")),
+            title: "Voyages",
+            tabBarIcon: ({
+                           color,
+                           focused
+                         }) => (TabBarIcon(color, focused, "Voyages", "bag-suitcase-outline", "bag-suitcase")),
           }}
       />
       <Tabs.Screen
@@ -66,14 +79,20 @@ const TabLayout = () => {
             tabBarBadge: 3,
             tabBarBadgeStyle: {backgroundColor: "#D13744", marginTop: 5,},
             title: "Messages",
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Messages", "message")),
+            tabBarIcon: ({
+                           color,
+                           focused
+                         }) => (TabBarIcon(color, focused, "Messages", "message-text-outline", "message-text")),
           }}
       />
       <Tabs.Screen
           name="account"
           options={{
             title: "Mon compte",
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Mon compte", "account-settings")),
+            tabBarIcon: ({
+                           color,
+                           focused
+                         }) => (TabBarIcon(color, focused, "Mon compte", "account-settings-outline", "account-settings")),
           }}
       />
     </Tabs>
