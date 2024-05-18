@@ -2,10 +2,10 @@ import React from 'react'
 import {Text} from 'react-native'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 
-const Settings = () => {
+const Account = () => {
   return (<DynamicSafeAreaView className="h-full bg-white">
-    <Text>settings</Text>
+    <Text>my account</Text>
   </DynamicSafeAreaView>)
 }
 
-export default Settings
+export default Account

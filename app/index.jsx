@@ -1,22 +1,37 @@
 import {getItem} from "./utils/asyncStorage";
-import {useEffect, useState} from "react";
+import {useMemo, useState} from "react";
 import {Redirect} from "expo-router";
+import auth from "@react-native-firebase/auth";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
+
   const checkIfLoggedIn = async () => {
-    if (await getItem("isLoggedIn")) {
-      setIsLoggedIn(true)
+    try {
+      console.log(await auth().currentUser.getIdToken())
+    } catch (e) {
     }
+
+    console.log((await getItem("isLoggedIn")) != null)
+    if ((await getItem("isLoggedIn")) != null) {
+      setIsLoggedIn(true)
+      return
+    }
+
+    // check if user is only logged in firebase
+    //  this check is for when a new user successfully login but doesn't complete registration
+    if ((await auth().currentUser) != null) {
+      await auth().signOut()
+    }
+    setIsLoggedIn(false)
   }
-  useEffect(() => {
-    checkIfLoggedIn()
+  useMemo(async () => {
+    await checkIfLoggedIn()
   }, [])
 
-  if (isLoggedIn) {
-    return <Redirect href="/listings"/>
+  if (isLoggedIn != null) {
+    return <Redirect href={isLoggedIn ? "/listings" : "/login"}/>
   }
-  return <Redirect href="/register"/>
-
 }
 export default App

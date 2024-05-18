@@ -21,10 +21,8 @@ const TabBarIcon = (color, focused, title, icon) => {
       {title}
     </Text>
   </View>)
-
 }
 const TabLayout = () => {
-
   return (<>
     <Tabs
 
@@ -32,7 +30,7 @@ const TabLayout = () => {
           tabBarActiveTintColor: COLORS.brand,
           tabBarInactiveTintColor: COLORS.cgrey,
           tabBarShowLabel: false,
-          headerShown:false,
+          headerShown: false,
           tabBarStyle: {
             backgroundColor: "white",
             borderTopWidth: 0.2,
@@ -46,23 +44,20 @@ const TabLayout = () => {
       <Tabs.Screen
           name="listings"
           options={{
-            title: "Annonces",
-            // headerShown: false,
+            title: "Annonces", // headerShown: false,
             tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Annonces", "map-search")),
           }}
       />
       <Tabs.Screen
           name="trips"
           options={{
-            title: "Voyages",
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Voyages", "truck-fast")),
+            title: "Voyages", tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Voyages", "truck-fast")),
           }}
       />
       <Tabs.Screen
           name="tracking"
           options={{
-            title: "Suivi",
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Suivi", "inbox-multiple")),
+            title: "Suivi", tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Suivi", "inbox-multiple")),
           }}
       />
       <Tabs.Screen
@@ -75,10 +70,10 @@ const TabLayout = () => {
           }}
       />
       <Tabs.Screen
-          name="settings"
+          name="account"
           options={{
-            title: "Paramètres",
-            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Paramètres", "account-settings")),
+            title: "Mon compte",
+            tabBarIcon: ({color, focused}) => (TabBarIcon(color, focused, "Mon compte", "account-settings")),
           }}
       />
     </Tabs>

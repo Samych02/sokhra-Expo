@@ -6,8 +6,8 @@ import {height} from "../../constants/dimmesions"
 import validatePhoneNumber from "../utils/validatePhoneNumber"
 import parseValidePhoneNumber from "../utils/parseValidePhoneNumber"
 import {router} from "expo-router"
-import auth from "@react-native-firebase/auth"
 import confirmStore from "../../store/confirmStore"
+import loginWithPhoneNumber from "../utils/loginWithPhoneNumber";
 
 const login = () => {
   const [countryCode, setCountryCode] = useState(null)
@@ -15,10 +15,6 @@ const login = () => {
   const [loading, setLoading] = useState(false)
   const {confirm, setConfirm} = confirmStore();
 
-  const loginWithPhoneNumber = async (phoneNumber) => {
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
-    setConfirm(confirmation)
-  }
 
   const handlePress = () => {
     if (nationalNumber === "") {
@@ -31,7 +27,7 @@ const login = () => {
       return Alert.alert("Numéro de téléphone invalide")
     }
     const parsedPhoneNumber = parseValidePhoneNumber(countryCode.cca2, nationalNumber)
-    loginWithPhoneNumber(parsedPhoneNumber)
+    loginWithPhoneNumber(parsedPhoneNumber, setConfirm)
     setLoading(false)
 
     router.navigate({pathname: "/otp", params: {parsedPhoneNumber: parsedPhoneNumber}})
@@ -46,7 +42,7 @@ const login = () => {
       <PhoneNumberField nationalNumber={nationalNumber} setNationalNumber={setNationalNumber}
                         countryCode={countryCode} setCountryCode={setCountryCode}/>
       <TouchableOpacity className="justify-center items-center w-full h-11 bg-brand rounded-md"
-                        style={{marginBottom: 25}} onPress={handlePress}>
+                        style={{marginBottom: 25}} onPress={handlePress} disabled={loading}>
         {loading ? <ActivityIndicator size="large" color="white"/> :
             <Text className="text-white font-pmedium text-lg">Envoyer le code</Text>}
       </TouchableOpacity>
