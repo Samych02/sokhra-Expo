@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ActivityIndicator, Alert, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View} from 'react-native'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView"
 import {router} from "expo-router"
 import COLORS from "../../constants/colors";
@@ -9,6 +9,7 @@ import {TextInput} from 'react-native-paper';
 import {CameraType, launchCameraAsync, requestCameraPermissionsAsync} from "expo-image-picker";
 import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
 import {setItem} from "../utils/asyncStorage";
+import imageToFile from "../utils/imageToFile";
 
 const register = () => {
   const [firstName, setFirstName] = useState("")
@@ -44,11 +45,7 @@ const register = () => {
     const formData = new FormData()
     formData.append("firstName", firstName)
     formData.append("lastName", lastName)
-    formData.append("profilePicture", {
-      uri: Platform.OS === 'android' ? image.uri : 'file://' + image.uri,
-      name: "image." + image.mimeType.split("/")[1],
-      type: image.mimeType // or your mime type what you want
-    })
+    formData.append("profilePicture", imageToFile(image))
     const data = await sendAuthenticatedRequest("post", "/user/register", formData, true)
     if (data.created) {
       await setItem("isLoggedIn", "true")
