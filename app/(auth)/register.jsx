@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, Alert, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView"
 import {router} from "expo-router"
 import COLORS from "../../constants/colors";
@@ -8,7 +8,6 @@ import {Avatar} from "react-native-elements";
 import {TextInput} from 'react-native-paper';
 import {CameraType, launchCameraAsync, requestCameraPermissionsAsync} from "expo-image-picker";
 import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
-import UserDetails from "../model/userDetails";
 import {setItem} from "../utils/asyncStorage";
 
 const register = () => {
@@ -20,7 +19,7 @@ const register = () => {
   const pickImage = async () => {
     await requestCameraPermissionsAsync()
     let result = await launchCameraAsync({
-      cameraType: CameraType.front, allowsEditing: true, aspect: [1, 1], quality: 1, base64: true,
+      cameraType: CameraType.front, allowsEditing: true, aspect: [1, 1], quality: 1,
     })
     if (!result.canceled) {
       setImage(result.assets[0]);
@@ -42,18 +41,23 @@ const register = () => {
     }
     setLoading(true)
 
-    const userDetails = new UserDetails(firstName, lastName, image.base64)
-
-    if (await sendAuthenticatedRequest("post", "/user/register", userDetails)) {
+    const formData = new FormData()
+    formData.append("firstName", firstName)
+    formData.append("lastName", lastName)
+    formData.append("profilePicture", {
+      uri: Platform.OS === 'android' ? image.uri : 'file://' + image.uri,
+      name: "image." + image.mimeType.split("/")[1],
+      type: image.mimeType // or your mime type what you want
+    })
+    const data = await sendAuthenticatedRequest("post", "/user/register", formData, true)
+    if (data.created) {
       await setItem("isLoggedIn", "true")
       setLoading(false)
       return router.navigate("/listings")
     } else {
       setLoading(false)
-      Alert.alert("Une erreur est survenue veuillez réessayer!")
     }
   }
-
 
   return (<DynamicSafeAreaView className="h-full bg-white">
     <TouchableOpacity onPress={() => {
@@ -89,9 +93,9 @@ const register = () => {
                             }}/>
         </Avatar>}
         {image && <Avatar
-          size={150}
-          rounded
-          source={{uri: image.uri}}>
+            size={150}
+            rounded
+            source={{uri: image.uri}}>
           <Avatar.Accessory size={30} name="camera" type="entypo" color={"white"}
                             onPress={pickImage}
                             style={{
@@ -104,7 +108,7 @@ const register = () => {
                               shadowColor: "white"
                             }}/>
         </Avatar>}
-    </View>
+      </View>
       <View className="mx-3 mt-5">
 
         <TextInput
@@ -138,15 +142,12 @@ const register = () => {
             activeOutlineColor={COLORS.brand}
         />
         <TouchableOpacity className="justify-center items-center w-full h-11 bg-brand rounded-md" onPress={submit}
-                          disabled={loading}>
+        >
           {loading ? <ActivityIndicator size="large" color="white"/> :
               <Text className="text-white font-pmedium text-lg">Valider</Text>}
         </TouchableOpacity>
       </View>
     </ScrollView>
-
-
-
   </DynamicSafeAreaView>)
 }
 

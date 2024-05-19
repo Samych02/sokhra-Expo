@@ -21,8 +21,8 @@ const otp = () => {
   const confirmCode = async (code) => {
     try {
       await confirm.confirm(code)
-      const shouldRegister = await sendAuthenticatedRequest("get", "/user/register/shouldRegister")
-      if (shouldRegister) {
+      const data = await sendAuthenticatedRequest("get", "/user/register/shouldRegister")
+      if (data.shouldRegister) {
         return router.navigate("/register")
       }
       await setItem("isLoggedIn", "true")

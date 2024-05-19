@@ -29,6 +29,7 @@ const App = () => {
     await checkIfLoggedIn()
   }, [])
 
+  // wait until isLoggedIn is set
   if (isLoggedIn != null) {
     return <Redirect href={isLoggedIn ? "/listings" : "/login"}/>
   }
