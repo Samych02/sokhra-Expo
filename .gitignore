@@ -40,3 +40,4 @@ apiKeys.js
 *.apk
 google-services.json
 android
+config

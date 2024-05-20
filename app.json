@@ -24,8 +24,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "xyz.sokhra",
-      "googleServicesFile": "./google-services.json"
+      "package": "xyz.sokhra"
     },
     "web": {
       "bundler": "metro",
