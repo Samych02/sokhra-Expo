@@ -31,7 +31,7 @@ const App = () => {
 
   // wait until isLoggedIn is set
   if (isLoggedIn != null) {
-    return <Redirect href={isLoggedIn ? "/listings" : "/listings"}/>
+    return <Redirect href={isLoggedIn ? "/listings" : "/login"}/>
   }
 }
 export default App

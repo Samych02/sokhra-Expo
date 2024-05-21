@@ -24,6 +24,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "googleServicesFile": "./config/google-services.json",
       "package": "xyz.sokhra"
     },
     "web": {
