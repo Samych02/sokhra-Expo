@@ -1,6 +1,5 @@
 import {Dropdown} from "react-native-element-dropdown"
 import {MaterialCommunityIcons} from "@expo/vector-icons"
-import COLORS from "../constants/colors"
 import React from "react"
 import axios from "axios"
 import {google_places_api_key} from "../config/apiKeys";
@@ -24,20 +23,20 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
   }
 
   return (<Dropdown
+      onFocus={() => console.log(1)}
+      onBlur={() => console.log(2)}
+      // disable={true}
       searchPlaceholder={searchPlaceholder}
       labelField="label"
       valueField="value"
       placeholder={placeholder}
       renderLeftIcon={() => (
-          <MaterialCommunityIcons name={iconName} size={20} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
+          <MaterialCommunityIcons name={iconName} size={20} style={{color: Colors.cgrey, marginHorizontal: 5}}/>)}
       renderRightIcon={() => null}
       value={value}
       data={data}
       onChange={item => {
-        console.log(data)
-        console.log(value)
         setValue(item)
-        console.log(value)
       }}
       search
       autoScroll={false}
