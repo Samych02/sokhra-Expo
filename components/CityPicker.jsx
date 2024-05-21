@@ -3,6 +3,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons"
 import React from "react"
 import axios from "axios"
 import {google_places_api_key} from "../config/apiKeys";
+import COLORS from "../constants/colors";
 
 
 const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, data, setData}) => {
@@ -31,7 +32,7 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
       valueField="value"
       placeholder={placeholder}
       renderLeftIcon={() => (
-          <MaterialCommunityIcons name={iconName} size={20} style={{color: Colors.cgrey, marginHorizontal: 5}}/>)}
+          <MaterialCommunityIcons name={iconName} size={20} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
       renderRightIcon={() => null}
       value={value}
       data={data}
@@ -44,7 +45,8 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
         searchCity(searchQuery)
       }}
       searchQuery={() => true}
-      style={{height: 45,}}
+      style={{height: 35,}}
+      placeholderStyle={{color: COLORS.cgrey}}
   />)
 }
 export default CityPicker;
