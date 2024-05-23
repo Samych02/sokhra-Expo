@@ -1,5 +1,14 @@
-import React, {useState} from 'react'
-import {StatusBar, TouchableOpacity, View} from 'react-native'
+import React, {useLayoutEffect, useState} from 'react'
+import {
+  FlatList,
+  LayoutAnimation,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  UIManager,
+  View
+} from 'react-native'
 import {Input} from "react-native-elements";
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
@@ -10,6 +19,7 @@ import COLORS from "../../constants/colors";
 import dateToString from "../utils/dateToString";
 import CustomDatePicker from "../../components/customDatePicker";
 import {Button} from "react-native-paper";
+import TravelCard from "../../components/TravelCard";
 
 const Listings = () => {
   const [origin, setOrigin] = useState(null)
@@ -23,6 +33,86 @@ const Listings = () => {
   const today = new Date()
   const [date, setDate] = useState(today)
 
+  if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+  //
+  const [formVisible, setFormVisible] = useState(true);
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 16,
+    },
+  });
+  const handleScroll = (event) => {
+    const scrollY = event.nativeEvent.contentOffset.y;
+    setFormVisible(scrollY <= 50);
+  };
+  useLayoutEffect(() => LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut), [formVisible])
+  //
+  const data = [
+    {
+      id: "1234",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 5,
+      image: require("../test.png")
+    }, {
+      id: "12345",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 3.5,
+      image: require("../test.png")
+    }, {
+      id: "123fr45",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 0,
+      image: require("../test.png")
+    }, {
+      id: "12frfr345",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 3.5,
+      image: require("../test.png")
+    }, {
+      id: "123frfr45",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 3.5,
+      image: require("../test.png")
+    }, {
+      id: "1233fe45",
+      origin: "Safi",
+      destination: "Rabat",
+      date: "25/05/2024",
+      weight: 20,
+      price: 5,
+      name: "samy",
+      rating: 3.5,
+      image: require("../test.png")
+    },]
+
   const swapFields = () => {
     const tmpData = originData
     setOriginData(destinationData)
@@ -34,9 +124,16 @@ const Listings = () => {
 
   return (<DynamicSafeAreaView className="h-full bg-white">
     <StatusBar backgroundColor={COLORS.brand}/>
-    <View className="bg-brand pt-2 pb-3 ">
+    <View className="bg-brand"
+          style={{
+            overflow: 'hidden',
+            height: formVisible ? "auto" : 0,
+            backgroundColor: COLORS.brand,
+            paddingTop: formVisible ? 8 : 0,
+            paddingBottom: formVisible ? 12 : 0,
+          }}>
       <View className="mx-3">
-        <View className="rounded-md bg-white mb-2">
+        <View className="bg-white mb-2" style={{borderRadius: 10}}>
           <CityPicker placeholder="Départ" value={origin} setValue={setOrigin} iconName="airplane-takeoff"
                       labelField="label"
                       valueField="value"
@@ -65,7 +162,7 @@ const Listings = () => {
 
           <TouchableOpacity onPress={() => setOpen(true)} style={{width: "48%"}}>
             <Input
-                value={date != today ? dateToString(date) : ""}
+                value={date !== today ? dateToString(date) : ""}
                 placeholderTextColor="black"
                 disabled={true}
                 renderErrorMessage={false}
@@ -73,7 +170,7 @@ const Listings = () => {
                 containerStyle={{
                   backgroundColor: "white",
                   paddingHorizontal: 0,
-                  borderRadius: 6,
+                  borderRadius: 10,
                 }}
                 placeholder="Date"
                 leftIcon={<MaterialCommunityIcons name="calendar-clock" size={20} color={COLORS.cgrey}/>}
@@ -93,21 +190,22 @@ const Listings = () => {
               containerStyle={{
                 backgroundColor: "white",
                 paddingHorizontal: 0,
-                borderRadius: 6,
+                borderRadius: 10,
                 width: "48%"
               }}
-              placeholder="Masse"
+              placeholder="Poids"
               leftIcon={<MaterialCommunityIcons name="weight-kilogram" size={20} color={COLORS.cgrey}/>}
               leftIconContainerStyle={{width: 25, height: 25, marginLeft: 5,}}
           />
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-          <Button labelStyle={{fontSize: 18,}} style={{width: "60%", borderRadius: 6, height: 40,}}
-                  buttonColor="#3e824b" icon="plus" mode="contained" onPress={() => console.log('Pressed')}>
+          <Button labelStyle={{fontSize: 18,}}
+                  style={{width: "60%", borderRadius: 10, height: 40, backgroundColor: "#3db830"}}
+                  icon="plus" mode="contained" onPress={() => console.log('Pressed')}>
             Ajouter une annonce
           </Button>
 
-          <Button labelStyle={{fontSize: 18}} style={{width: "35%", borderRadius: 6, height: 40}}
+          <Button labelStyle={{fontSize: 18}} style={{width: "35%", borderRadius: 10, height: 40}}
                   buttonColor={COLORS.cgrey} icon="magnify" mode="contained" onPress={() => console.log('Pressed')}>
             Chercher
           </Button>
@@ -115,9 +213,19 @@ const Listings = () => {
 
 
       </View>
-
-
     </View>
+
+
+    {/**/}
+
+    <FlatList
+        data={data}
+        renderItem={(item) => TravelCard(item)}
+        onScroll={handleScroll}
+        keyExtractor={item => item.id}
+    />
+
+    {/*//*/}
   </DynamicSafeAreaView>)
 }
 
