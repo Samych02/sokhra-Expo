@@ -1,4 +1,4 @@
-import {Avatar, Card} from "react-native-elements";
+import {Avatar, Card} from "@rneui/base";
 import COLORS from "../constants/colors";
 import {Text, TouchableOpacity, View} from "react-native";
 import capitalizeFirstLetter from "../app/utils/capitalizeFirstLetter";

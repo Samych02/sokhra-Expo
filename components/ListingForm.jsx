@@ -2,7 +2,7 @@ import {StatusBar, TouchableOpacity, View} from "react-native";
 import COLORS from "../constants/colors";
 import CityPicker from "./CityPicker";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {Input} from "react-native-elements";
+import {Input} from "@rneui/base";
 import dateToString from "../app/utils/dateToString";
 import CustomDatePicker from "./CustomDatePicker";
 import floatInputHandler from "../app/utils/floatInputHandler";

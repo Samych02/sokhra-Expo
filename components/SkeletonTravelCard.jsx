@@ -1,9 +1,8 @@
 import {View} from "react-native";
-import {Card} from "react-native-elements";
+import {Card, Skeleton} from "@rneui/base";
 import COLORS from "../constants/colors";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import React from "react";
-import {Skeleton} from "@rneui/base";
 
 const SkeletonTravelCard = () => {
   return (<View className="w-full">
