@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ActivityIndicator, Alert, Text, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {router, useLocalSearchParams} from 'expo-router'
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 import {height} from "../../constants/dimmesions";
@@ -15,11 +15,12 @@ const otp = () => {
   const {parsedPhoneNumber} = useLocalSearchParams()
   const [numberOfSeconds, setNumberOfSeconds] = useState(30)
   const [loading, setLoading] = useState(false)
+  const [loginLoading, setLoginLoading] = useState(false)
   const {confirm, setConfirm} = confirmStore();
-
 
   const confirmCode = async (code) => {
     try {
+      setLoginLoading(true)
       await confirm.confirm(code)
       const data = await sendAuthenticatedRequest("get", "/user/register/shouldRegister")
       if (data.shouldRegister) {
@@ -29,6 +30,7 @@ const otp = () => {
       return router.navigate("/listings")
 
     } catch (error) {
+      setLoginLoading(false)
       Alert.alert("code incorrect")
     }
   }
@@ -45,6 +47,16 @@ const otp = () => {
   }
 
   return (<DynamicSafeAreaView className="h-full bg-white">
+    {loginLoading && (
+        <View style={{
+          ...StyleSheet.absoluteFillObject,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          justifyContent: 'center',
+          alignItems: 'center', zIndex: 1
+        }}>
+          <ActivityIndicator size={50} color={COLORS.brand}/>
+        </View>
+    )}
     <TouchableOpacity onPress={() => {
       router.navigate("/login")
     }} style={{
