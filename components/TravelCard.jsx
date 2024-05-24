@@ -1,4 +1,4 @@
-import {Avatar, Card} from "@rneui/base";
+import {Avatar, Card} from "@rneui/themed"
 import COLORS from "../constants/colors";
 import {Text, TouchableOpacity, View} from "react-native";
 import capitalizeFirstLetter from "../app/utils/capitalizeFirstLetter";
@@ -46,11 +46,7 @@ const TravelCard = ({item}) => {
             <TouchableOpacity className="flex-row items-center " onPress={() => {
               console.log(1)
             }}>
-              <Avatar
-                  size={55}
-                  rounded
-                  source={item.image}
-              />
+              <Avatar source={item.image} size={55} rounded={true}/>
               <View className="flex-col ml-4 justify-between">
                 <Text className="mb-2 font-psemibold text-cgrey text-xl">{capitalizeFirstLetter(item.name)}</Text>
                 <Rating rating={item.rating} size={18} scale={1} spacing={4} disabled={true}

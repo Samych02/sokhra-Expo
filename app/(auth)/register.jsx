@@ -4,7 +4,7 @@ import DynamicSafeAreaView from "../../components/DynamicSafeAreaView"
 import {router} from "expo-router"
 import COLORS from "../../constants/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {Avatar} from "@rneui/base";
+import {Avatar} from "@rneui/themed";
 import {TextInput} from 'react-native-paper';
 import {CameraType, launchCameraAsync, requestCameraPermissionsAsync} from "expo-image-picker";
 import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
