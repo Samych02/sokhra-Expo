@@ -16,7 +16,7 @@ const login = () => {
   const {confirm, setConfirm} = confirmStore();
 
 
-  const handlePress = () => {
+  const handlePress = async () => {
     if (nationalNumber === "") {
       return Alert.alert("Veuillez entrer votre numéro de téléphone")
     }
@@ -27,8 +27,14 @@ const login = () => {
       return Alert.alert("Numéro de téléphone invalide")
     }
     const parsedPhoneNumber = parseValidePhoneNumber(countryCode.cca2, nationalNumber)
-    loginWithPhoneNumber(parsedPhoneNumber, setConfirm)
-    setLoading(false)
+
+    try {
+      await loginWithPhoneNumber(parsedPhoneNumber, setConfirm)
+    } catch (err) {
+      return Alert.alert("Error", err.toString())
+    } finally {
+      setLoading(false)
+    }
 
     router.navigate({pathname: "/otp", params: {parsedPhoneNumber: parsedPhoneNumber}})
   }

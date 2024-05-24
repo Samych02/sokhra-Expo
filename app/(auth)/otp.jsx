@@ -58,6 +58,7 @@ const otp = () => {
         </View>
     )}
     <TouchableOpacity onPress={() => {
+      setConfirm(null)
       router.navigate("/login")
     }} style={{
       backgroundColor: COLORS.fgrey, borderRadius: 20, width: 40, height: 40, marginLeft: 15, justifyContent: "center"
