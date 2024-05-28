@@ -1,13 +1,14 @@
 import {StatusBar, TouchableOpacity, View} from "react-native";
 import COLORS from "../constants/colors";
 import CityPicker from "./CityPicker";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {AntDesign, MaterialCommunityIcons} from "@expo/vector-icons";
 import {Input} from "@rneui/themed";
 import dateToString from "../app/utils/dateToString";
 import CustomDatePicker from "./CustomDatePicker";
-import floatInputHandler from "../app/utils/floatInputHandler";
-import {Button} from "react-native-paper";
+import intInputHandler from "../app/utils/intInputHandler";
+import {IconButton} from "react-native-paper";
 import React from "react";
+import {router} from "expo-router";
 
 const ListingForm = ({
                        formVisible,
@@ -43,8 +44,8 @@ const ListingForm = ({
             overflow: 'hidden',
             height: formVisible ? "auto" : 0,
             backgroundColor: COLORS.brand,
-            paddingTop: formVisible ? 8 : 0,
-            paddingBottom: formVisible ? 12 : 0,
+            paddingTop: formVisible ? 2 : 0,
+            paddingBottom: formVisible ? 2 : 0,
           }}>
       <View className="mx-3">
         <View className="bg-white mb-2" style={{borderRadius: 10}}>
@@ -73,11 +74,11 @@ const ListingForm = ({
                       setData={setDestinationData}/>
         </View>
         <View
-            style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8}}>
+            style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4}}>
 
           <TouchableOpacity onPress={() => setOpen(true)} style={{width: "48%"}}>
             <Input
-                value={date !== today ? dateToString(date) : ""}
+                value={date == null ? "" : dateToString(date)}
                 placeholderTextColor="black"
                 disabled={true}
                 renderErrorMessage={false}
@@ -90,12 +91,12 @@ const ListingForm = ({
                 leftIconContainerStyle={{width: 25, height: 25, marginLeft: 5,}}
             />
           </TouchableOpacity>
-          <CustomDatePicker date={date} open={open} setDate={setDate} setOpen={setOpen}/>
+          <CustomDatePicker date={date ? date : new Date()} open={open} setDate={setDate} setOpen={setOpen}/>
 
           <Input
               placeholderTextColor={COLORS.cgrey}
               value={weight}
-              onChangeText={(input) => floatInputHandler(input, setWeight)}
+              onChangeText={(input) => intInputHandler(input, setWeight)}
               inputMode="decimal"
               disabled={false}
               renderErrorMessage={false}
@@ -103,22 +104,33 @@ const ListingForm = ({
               containerStyle={{
                 backgroundColor: "white", paddingHorizontal: 0, borderRadius: 10, width: "48%"
               }}
-              placeholder="Poids"
+              placeholder="Poids (kg)"
               leftIcon={<MaterialCommunityIcons name="weight-kilogram" size={20} color={COLORS.cgrey}/>}
               leftIconContainerStyle={{width: 25, height: 25, marginLeft: 5,}}
           />
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-          <Button labelStyle={{fontSize: 18,}}
-                  style={{width: "60%", borderRadius: 10, height: 40, backgroundColor: "#3db830"}}
-                  icon="plus" mode="contained" onPress={() => console.log('Pressed')}>
-            Ajouter une annonce
-          </Button>
+          <TouchableOpacity onPress={() => router.navigate("/test")} style={{width: "48%"}}>
+            <Input
+                value={null}
+                renderErrorMessage={false}
+                inputContainerStyle={{borderBottomWidth: 0, height: 35}}
+                containerStyle={{
+                  backgroundColor: "#3db830", paddingHorizontal: 0, borderRadius: 10
+                }}
+                inputStyle={{fontSize: 17}}
+                placeholder="Nouvelle annonce"
+                placeholderTextColor="white"
+                placeholderTextSize={20}
+                leftIcon={<AntDesign name="plus" size={20} color="white"/>}
+                leftIconContainerStyle={{width: 25, height: 25, marginLeft: 5,}}
+            />
+          </TouchableOpacity>
 
-          <Button labelStyle={{fontSize: 18}} style={{width: "35%", borderRadius: 10, height: 40}}
-                  buttonColor={COLORS.cgrey} icon="magnify" mode="contained" onPress={() => console.log('Pressed')}>
-            Chercher
-          </Button>
+          <IconButton icon="close" mode="contained" size={28} iconColor="red" containerColor={COLORS.cgrey}
+                      style={{width: 35, height: 35}}/>
+          <IconButton icon="magnify" mode="contained" size={28} iconColor="white" containerColor="#A004BA"
+                      style={{width: 35, height: 35}}/>
         </View>
 
 

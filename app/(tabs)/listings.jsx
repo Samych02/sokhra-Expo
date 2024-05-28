@@ -17,10 +17,10 @@ const Listings = () => {
   const [weight, setWeight] = useState("")
 
   const today = new Date()
-  const [date, setDate] = useState(today)
+  const [date, setDate] = useState(null)
 
   const [formVisible, setFormVisible] = useState(true);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   // enable animation for android
   if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -102,7 +102,7 @@ const Listings = () => {
           image: require("../test.png")
         },]);
       setLoading(false);
-    }, 2000);
+    }, 0);
   }, []);
 
   return (<DynamicSafeAreaView className="h-full bg-white">

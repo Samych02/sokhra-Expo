@@ -9,7 +9,7 @@ const App = () => {
 
   const checkIfLoggedIn = async () => {
     try {
-      console.log(await auth().currentUser.getIdToken())
+      console.log(await auth().currentUser.getIdToken(true))
     } catch (e) {
     }
 

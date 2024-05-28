@@ -75,8 +75,8 @@ const register = () => {
         {!image && <Avatar
             size={150}
             rounded
-            containerStyle={{backgroundColor: COLORS.cgrey, paddingTop: 30}}
-            icon={{name: "user", type: "font-awesome", size: 140}}>
+            containerStyle={{backgroundColor: "#c0c2c6", paddingTop: 20}}
+            icon={{name: "person-fill", type: "octicon", size: 150}}>
           <Avatar.Accessory size={30} name="camera" type="entypo" color={"white"}
                             onPress={pickImage}
                             style={{

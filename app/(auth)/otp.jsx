@@ -77,7 +77,7 @@ const otp = () => {
 
       <OtpInput
           numberOfDigits={6}
-          focusColor={COLORS.cgrey}
+          focusColor={COLORS.brand}
           hideStick
           theme={{
             pinCodeContainerStyle: {

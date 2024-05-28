@@ -36,7 +36,7 @@ const TabLayout = () => {
             backgroundColor: "white",
             borderTopWidth: 0.2,
             borderTopColor: COLORS.cgrey,
-            height: 80,
+            height: 65,
             paddingHorizontal: 4
           },
 
@@ -77,12 +77,12 @@ const TabLayout = () => {
           name="inbox"
           options={{
             tabBarBadge: 3,
-            tabBarBadgeStyle: {backgroundColor: "#D13744", marginTop: 5,},
+            tabBarBadgeStyle: {backgroundColor: "#D13744", marginTop: 2},
             title: "Messages",
             tabBarIcon: ({
                            color,
                            focused
-                         }) => (TabBarIcon(color, focused, "Messages", "message-text-outline", "message-text")),
+                         }) => (TabBarIcon(color, focused, "Messages", "chat-outline", "chat")),
           }}
       />
       <Tabs.Screen
@@ -92,7 +92,7 @@ const TabLayout = () => {
             tabBarIcon: ({
                            color,
                            focused
-                         }) => (TabBarIcon(color, focused, "Mon compte", "account-settings-outline", "account-settings")),
+                         }) => (TabBarIcon(color, focused, "Mon compte", "account-outline", "account")),
           }}
       />
     </Tabs>

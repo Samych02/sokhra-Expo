@@ -30,8 +30,8 @@ const login = () => {
 
     try {
       await loginWithPhoneNumber(parsedPhoneNumber, setConfirm)
-    } catch (err) {
-      return Alert.alert("Error", err.toString())
+    } catch (e) {
+      return Alert.alert("Erreur", "Trop de tentatives de connexion avec ce numéro de téléphone. Veuillez réessayer plus tard.")
     } finally {
       setLoading(false)
     }

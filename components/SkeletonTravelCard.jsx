@@ -36,7 +36,7 @@ const SkeletonTravelCard = () => {
           <Skeleton width={120} height={30} animation="wave" LinearGradientComponent={LinearGradient}/>
         </View>
         <View className="flex-row items-center justify-center">
-          <Skeleton width={80} height={30}/>
+          <Skeleton width={80} height={30} animation="wave" LinearGradientComponent={LinearGradient}/>
         </View>
       </View>
     </Card>

@@ -10,7 +10,7 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
 
   const searchCity = async (searchQuery = "") => {
     if (searchQuery.length < 3) return
-    const response = await axios.get("https://maps.googleapis.com/maps/api/place/autocomplete/json\n", {
+    const response = await axios.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
       params: {
         input: searchQuery, language: "fr", types: "(cities)", key: google_places_api_key
       }
@@ -24,9 +24,6 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
   }
 
   return (<Dropdown
-      onFocus={() => console.log(1)}
-      onBlur={() => console.log(2)}
-      // disable={true}
       searchPlaceholder={searchPlaceholder}
       labelField="label"
       valueField="value"
