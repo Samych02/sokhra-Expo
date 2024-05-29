@@ -1,8 +1,7 @@
 import React from "react"
 import {Stack} from "expo-router"
 
-const AuthLayout = () => {
-
+export default function AuthLayout() {
   return (<Stack>
     <Stack.Screen name="login" options={{headerShown: false}}></Stack.Screen>
     <Stack.Screen name="otp" options={{headerShown: false}}></Stack.Screen>
@@ -10,4 +9,3 @@ const AuthLayout = () => {
   </Stack>)
 }
 
-export default AuthLayout

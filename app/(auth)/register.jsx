@@ -7,17 +7,17 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import {Avatar} from "@rneui/themed";
 import {TextInput} from 'react-native-paper';
 import {CameraType, launchCameraAsync, requestCameraPermissionsAsync} from "expo-image-picker";
-import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
-import {setItem} from "../utils/asyncStorage";
-import imageToFile from "../utils/imageToFile";
+import sendAuthenticatedRequest from "../../utils/sendAuthenticatedRequest";
+import {setItem} from "../../utils/asyncStorage";
+import imageToFile from "../../utils/imageToFile";
 
-const register = () => {
+export default function register() {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(null);
 
-  const pickImage = async () => {
+  async function pickImage() {
     await requestCameraPermissionsAsync()
     let result = await launchCameraAsync({
       cameraType: CameraType.front, allowsEditing: true, aspect: [1, 1], quality: 1,
@@ -27,7 +27,7 @@ const register = () => {
     }
   }
 
-  const submit = async () => {
+  async function submit() {
     if (lastName === "" || lastName.length < 3) {
       Alert.alert("Veuillez entrer un nom valid.")
       return
@@ -50,7 +50,7 @@ const register = () => {
     if (data.created) {
       await setItem("isLoggedIn", "true")
       setLoading(false)
-      return router.navigate("/listings")
+      return router.navigate("/home")
     } else {
       setLoading(false)
     }
@@ -147,5 +147,3 @@ const register = () => {
     </ScrollView>
   </DynamicSafeAreaView>)
 }
-
-export default register

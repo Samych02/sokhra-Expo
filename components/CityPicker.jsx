@@ -6,8 +6,7 @@ import {google_places_api_key} from "../config/apiKeys";
 import COLORS from "../constants/colors";
 
 
-const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, data, setData}) => {
-
+export default function CityPicker({placeholder, iconName, value, setValue, searchPlaceholder, data, setData}) {
   const searchCity = async (searchQuery = "") => {
     if (searchQuery.length < 3) return
     const response = await axios.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
@@ -24,12 +23,14 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
   }
 
   return (<Dropdown
+      containerStyle={{marginBottom: 150}}
+      mode="modal"
       searchPlaceholder={searchPlaceholder}
       labelField="label"
       valueField="value"
       placeholder={placeholder}
       renderLeftIcon={() => (
-          <MaterialCommunityIcons name={iconName} size={20} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
+          <MaterialCommunityIcons name={iconName} size={25} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
       renderRightIcon={() => null}
       value={value}
       data={data}
@@ -42,8 +43,9 @@ const CityPicker = ({placeholder, iconName, value, setValue, searchPlaceholder, 
         searchCity(searchQuery)
       }}
       searchQuery={() => true}
-      style={{height: 35,}}
-      placeholderStyle={{color: COLORS.cgrey}}
+      style={{height: 45,}}
+      selectedTextProps={{ellipsizeMode: "tail", numberOfLines: 1}}
+      selectedTextStyle={{fontSize: 20,}}
+      placeholderStyle={{color: COLORS.cgrey, fontSize: 20}}
   />)
 }
-export default CityPicker;

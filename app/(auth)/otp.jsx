@@ -7,11 +7,11 @@ import {OtpInput} from "react-native-otp-entry";
 import COLORS from "../../constants/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import confirmStore from "../../store/confirmStore";
-import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
-import {setItem} from "../utils/asyncStorage";
-import loginWithPhoneNumber from "../utils/loginWithPhoneNumber";
+import sendAuthenticatedRequest from "../../utils/sendAuthenticatedRequest";
+import {setItem} from "../../utils/asyncStorage";
+import loginWithPhoneNumber from "../../utils/loginWithPhoneNumber";
 
-const otp = () => {
+export default function otp() {
   const {parsedPhoneNumber} = useLocalSearchParams()
   const [numberOfSeconds, setNumberOfSeconds] = useState(30)
   const [loading, setLoading] = useState(false)
@@ -27,7 +27,7 @@ const otp = () => {
         return router.navigate("/register")
       }
       await setItem("isLoggedIn", "true")
-      return router.navigate("/listings")
+      return router.navigate("/home")
 
     } catch (error) {
       setLoginLoading(false)
@@ -101,5 +101,3 @@ const otp = () => {
     </TouchableOpacity>}
   </DynamicSafeAreaView>)
 }
-
-export default otp

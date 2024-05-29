@@ -3,17 +3,17 @@ import {ActivityIndicator, Alert, Text, TouchableOpacity, View} from 'react-nati
 import PhoneNumberField from "../../components/PhoneNumberField"
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView"
 import {height} from "../../constants/dimmesions"
-import validatePhoneNumber from "../utils/validatePhoneNumber"
-import parseValidePhoneNumber from "../utils/parseValidePhoneNumber"
+import validatePhoneNumber from "../../utils/validatePhoneNumber"
+import parseValidePhoneNumber from "../../utils/parseValidePhoneNumber"
 import {router} from "expo-router"
-import confirmStore from "../../store/confirmStore"
-import loginWithPhoneNumber from "../utils/loginWithPhoneNumber";
+import loginWithPhoneNumber from "../../utils/loginWithPhoneNumber";
+import confirmStore from "../../store/confirmStore";
 
-const login = () => {
+export default function login() {
   const [countryCode, setCountryCode] = useState(null)
   const [nationalNumber, setNationalNumber] = useState("")
   const [loading, setLoading] = useState(false)
-  const {confirm, setConfirm} = confirmStore();
+  const {confirm, setConfirm} = confirmStore()
 
 
   const handlePress = async () => {
@@ -58,5 +58,3 @@ const login = () => {
       notre <Text className="underline">Politique de confidentialité</Text></Text>
   </DynamicSafeAreaView>)
 }
-
-export default login

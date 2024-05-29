@@ -1,17 +1,13 @@
-import {getItem} from "./utils/asyncStorage";
+import {getItem} from "../utils/asyncStorage";
 import {useMemo, useState} from "react";
 import {Redirect} from "expo-router";
 import auth from "@react-native-firebase/auth";
 
-const App = () => {
-
+export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null)
 
-  const checkIfLoggedIn = async () => {
-    try {
-      console.log(await auth().currentUser.getIdToken(true))
-    } catch (e) {
-    }
+  async function checkIfLoggedIn() {
+    // console.log(await auth().currentUser.getIdToken(true))
 
     if ((await getItem("isLoggedIn")) != null) {
       setIsLoggedIn(true)
@@ -31,7 +27,6 @@ const App = () => {
 
   // wait until isLoggedIn is set
   if (isLoggedIn != null) {
-    return <Redirect href={isLoggedIn ? "/listings" : "/login"}/>
+    return <Redirect href={isLoggedIn ? "/home" : "/login"}/>
   }
 }
-export default App

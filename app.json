@@ -1,31 +1,29 @@
 {
   "expo": {
-    "name": "sokhra",
-    "slug": "sokhra",
+    "name": "Sokhra",
+    "slug": "Sokhra",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "xyz.sokhra"
+      "bundleIdentifier": "me.Sokhra",
+      "googleServicesFile": "./config/GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./config/google-services.json",
-      "package": "xyz.sokhra"
+      "package": "me.Sokhra",
+      "googleServicesFile": "./config/google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -39,12 +37,21 @@
       [
         "expo-build-properties",
         {
+          "ios": {
+            "useFrameworks": "static"
+          },
           "android": {
             "usesCleartextTraffic": true
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your camera."
+        }
+      ]
     ]
   }
 }

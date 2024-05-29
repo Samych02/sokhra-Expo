@@ -2,7 +2,7 @@ import {Alert} from "react-native";
 import DatePicker from "react-native-date-picker";
 import React from "react";
 
-const CustomDatePicker = ({open, setOpen, date, setDate}) => {
+export default function CustomDatePicker({open, setOpen, date, setDate}) {
   return (
       <DatePicker
           title="Selectionner une date"
@@ -25,4 +25,3 @@ const CustomDatePicker = ({open, setOpen, date, setDate}) => {
       />
   )
 }
-export default CustomDatePicker;
