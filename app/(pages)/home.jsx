@@ -1,6 +1,5 @@
 import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
-import {Avatar, Badge, Divider} from "@rneui/themed";
-import {Icon} from "@rneui/base";
+import {Avatar, Badge, Divider, Icon} from "@rneui/themed";
 import COLORS from "../../constants/colors";
 import {LayoutAnimation, Platform, Text, TouchableOpacity, UIManager, View} from "react-native";
 import {useState} from "react";
@@ -39,7 +38,7 @@ export default function Home() {
 
               <View className="flex-row items-center">
                 <Icon name="chat" type="material-community" color={COLORS.cgrey} containerStyle={{alignSelf: "center"}}
-                      size={30}/>
+                      size={30} onPress={() => router.navigate("/chatList")}/>
                 <Badge value={1} badgeStyle={{
                   backgroundColor: COLORS.nred, opacity: (1 === 0) ? 0 : 1, marginBottom: 10, marginLeft: -10
                 }}/>
@@ -86,7 +85,7 @@ export default function Home() {
           <Icon size={100} name="search-outline" type="ionicon" color="white"
                 onPress={() => router.navigate("listings")}
                 containerStyle={{backgroundColor: COLORS.brand, padding: 10, alignSelf: "center", borderRadius: 20}}/>
-          <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 50, marginHorizontal: 20}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 50, marginHorizontal: 50}}>
             <Divider style={{flex: 1,}} color={COLORS.cgrey} width={1.5}/>
             <Text style={{marginHorizontal: 16, fontFamily: "Poppins-SemiBold", lineHeight: 20}}>OU</Text>
             <Divider style={{flex: 1}} color={COLORS.cgrey} width={1.5}/>

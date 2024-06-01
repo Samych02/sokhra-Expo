@@ -1,12 +1,16 @@
 import {Dropdown} from "react-native-element-dropdown"
 import {MaterialCommunityIcons} from "@expo/vector-icons"
-import React from "react"
+import React, {useState} from "react"
 import axios from "axios"
 import {google_places_api_key} from "../config/apiKeys";
 import COLORS from "../constants/colors";
+import defaultCities from "../constants/defaultCities";
 
 
-export default function CityPicker({placeholder, iconName, value, setValue, searchPlaceholder, data, setData}) {
+export default function CityPicker({placeholder, iconName, setValue, searchPlaceholder}) {
+  const [data, setData] = useState(defaultCities)
+
+
   const searchCity = async (searchQuery = "") => {
     if (searchQuery.length < 3) return
     const response = await axios.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
@@ -22,30 +26,35 @@ export default function CityPicker({placeholder, iconName, value, setValue, sear
     })))
   }
 
-  return (<Dropdown
-      containerStyle={{marginBottom: 150}}
-      mode="modal"
-      searchPlaceholder={searchPlaceholder}
-      labelField="label"
-      valueField="value"
-      placeholder={placeholder}
-      renderLeftIcon={() => (
-          <MaterialCommunityIcons name={iconName} size={25} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
-      renderRightIcon={() => null}
-      value={value}
-      data={data}
-      onChange={item => {
-        setValue(item)
-      }}
-      search
-      autoScroll={false}
-      onChangeText={(searchQuery) => {
-        searchCity(searchQuery)
-      }}
-      searchQuery={() => true}
-      style={{height: 45,}}
-      selectedTextProps={{ellipsizeMode: "tail", numberOfLines: 1}}
-      selectedTextStyle={{fontSize: 20,}}
-      placeholderStyle={{color: COLORS.cgrey, fontSize: 20}}
-  />)
+  return (
+      <Dropdown
+          mode="modal"
+          data={data}
+          labelField="label"
+          valueField="value"
+          onChange={item => {
+            setValue(item.value);
+          }}
+          value={null}
+          onChangeText={(searchQuery) => {
+            searchCity(searchQuery)
+          }}
+          placeholder={placeholder}
+          searchPlaceholder={searchPlaceholder}
+          search={true}
+          searchQuery={() => {
+            return true
+          }}
+          renderLeftIcon={() => (
+              <MaterialCommunityIcons name={iconName} size={25} style={{color: COLORS.cgrey, marginHorizontal: 5}}/>)}
+          renderRightIcon={() => {
+            null
+          }}
+          autoScroll={false}
+          style={{height: 45,}}
+          selectedTextProps={{ellipsizeMode: "tail", numberOfLines: 1}}
+          selectedTextStyle={{fontSize: 20,}}
+          placeholderStyle={{color: COLORS.cgrey, fontSize: 20}}
+      />
+  )
 }
