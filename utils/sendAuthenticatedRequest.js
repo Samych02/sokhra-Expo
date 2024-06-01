@@ -1,17 +1,20 @@
 import axios from "axios";
 import auth from "@react-native-firebase/auth";
 import {Alert} from "react-native";
+import domainName from "../constants/domainName";
 
-const sendAuthenticatedRequest = async (method, path, data = null, isFormData = false) => {
+const sendAuthenticatedRequest = async (method, path, data = null, isJsonData = false, isMultiPartForm = false, params = null,) => {
   const headers = {
     "Authorization": `Bearer ${await auth().currentUser.getIdToken(true)}`,
   }
-  if (isFormData) headers["Content-Type"] = "multipart/form-data"
+  if (isMultiPartForm) headers["Content-Type"] = "multipart/form-data"
+  if (isJsonData) headers["Content-Type"] = "application/json"
   const response = await axios({
     method: method,
-    url: `http://10.0.2.2:8080${path}`,
+    url: `${domainName}${path}`,
+    params: params,
+    data: data,
     headers: headers,
-    data: data
   })
   if (response.data.status === "success") {
     return response.data.data
@@ -21,4 +24,3 @@ const sendAuthenticatedRequest = async (method, path, data = null, isFormData = 
   }
 }
 export default sendAuthenticatedRequest
-
