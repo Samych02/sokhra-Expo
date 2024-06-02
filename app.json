@@ -12,7 +12,6 @@
     },
     "userInterfaceStyle": "light",
     "scheme": "sokhra.me",
-
     "ios": {
       "bundleIdentifier": "me.Sokhra",
       "googleServicesFile": "./config/GoogleService-Info.plist"

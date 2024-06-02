@@ -11,7 +11,7 @@ export default function CityPicker({placeholder, iconName, setValue, searchPlace
   const [data, setData] = useState(defaultCities)
 
 
-  const searchCity = async (searchQuery = "") => {
+  async function searchCity(searchQuery = "") {
     if (searchQuery.length < 3) return
     const response = await axios.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
       params: {

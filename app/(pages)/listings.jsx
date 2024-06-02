@@ -30,7 +30,7 @@ export default function Listings() {
   const [isVisible, setIsVisible] = useState(false)
   const snapPoints = [80, 280]
 
-  const handleToggleVisibility = () => {
+  function handleToggleVisibility() {
     if (bottomSheetRef.current) {
       if (isVisible) {
         bottomSheetRef.current.snapToIndex(0)
@@ -48,12 +48,17 @@ export default function Listings() {
     setIsLastPage(false)
   }
 
-  const fetchData = async () => {
+  async function fetchData() {
     if (isLastPage) return
     if (page === 0) setLoading(true)
     else setLoadingMore(true)
-    const response = await sendAuthenticatedRequest("get", "/trips",
-        null, false, false, {
+    const response = await sendAuthenticatedRequest(
+        "get",
+        "/trips",
+        null,
+        false,
+        false,
+        {
           page: page,
           originCity: (origin == null) ? null : origin.city,
           originCountry: (origin == null) ? null : origin.country,
@@ -62,6 +67,7 @@ export default function Listings() {
           departureDate: (departureDate == null) ? null : departureDate.toISOString().split("T")[0],
           weight: (weight == null || weight === "") ? null : parseInt(weight)
         })
+
     // if no results found
     if (page === 0 && response.tripPage.empty) setIsEmpty(true)
     setPage(page + 1)
@@ -78,49 +84,60 @@ export default function Listings() {
     fetchData()
   }, []);
 
-
   return (<DynamicSafeAreaView className="h-full bg-white">
-    <TouchableOpacity onPress={() => {
-      bottomSheetRef.current.snapToIndex(0)
-      router.navigate("/home")
-    }} style={{
-      backgroundColor: COLORS.fgrey,
-      borderRadius: 20,
-      width: 40,
-      height: 40,
-      marginLeft: 15,
-      justifyContent: "center",
-      marginBottom: 5
-    }}>
+    <TouchableOpacity
+        onPress={() => {
+          bottomSheetRef.current.snapToIndex(0)
+          router.navigate("/home")
+        }}
+        style={{
+          backgroundColor: COLORS.fgrey,
+          borderRadius: 20,
+          width: 40,
+          height: 40,
+          marginLeft: 15,
+          justifyContent: "center",
+          marginBottom: 5
+        }}>
       <Ionicons
           name="chevron-back"
           style={{
             fontSize: 35, color: COLORS.cgrey
-          }}
-      />
+          }}/>
     </TouchableOpacity>
-    {isEmpty && !loading && <View className="h-full items-center justify-center mx-3">
-      <Text className="text-center font-psemibold text-2xl">Aucun voyage ne correspond à vos
-        critères.</Text>
-    </View>}
 
-    {loading && <FlatList
-        data={[...Array(10).keys()]} renderItem={SkeletonTravelCard}
-        keyExtractor={(item) => item.toString()} contentContainerStyle={{
-      paddingBottom: 90
-    }}
-    />}
-    {!loading && !isEmpty && <FlatList data={listingData} renderItem={(item) => TravelCard(item)}
-                                       contentContainerStyle={{
-                                         paddingBottom: 90
-                                       }}
-                                       ListFooterComponent={() => {
-                                         return (loadingMore && page !== 0 &&
-                                             <View style={{marginBottom: 100, marginTop: 20}}>
-                                               <ActivityIndicator size="large" color={COLORS.brand}/>
-                                             </View>)
-                                       }}
-                                       onEndReached={fetchData}/>}
+    {isEmpty && !loading &&
+        <View className="h-full items-center justify-center mx-3">
+          <Text className="text-center font-psemibold text-2xl">
+            Aucun voyage ne correspond à vos critères.
+          </Text>
+        </View>}
+
+    {loading &&
+        <FlatList
+            data={[...Array(10).keys()]}
+            renderItem={SkeletonTravelCard}
+            contentContainerStyle={{
+              paddingBottom: 90
+            }}
+        />}
+
+    {!loading && !isEmpty &&
+        <FlatList
+            data={listingData}
+            renderItem={(item) => TravelCard(item)}
+            contentContainerStyle={{
+              paddingBottom: 90
+            }}
+            ListFooterComponent={() => {
+              return (loadingMore && page !== 0 &&
+                  <View style={{marginBottom: 100, marginTop: 20}}>
+                    <ActivityIndicator size="large" color={COLORS.brand}/>
+                  </View>)
+            }}
+            onEndReached={fetchData}
+        />}
+
     <BottomSheet
         backgroundStyle={{backgroundColor: COLORS.brand}}
         handleIndicatorStyle={{backgroundColor: "white"}}
@@ -129,34 +146,37 @@ export default function Listings() {
         snapPoints={snapPoints}
         onChange={(index) => setIsVisible(index === 1)}
     >
+
       <BottomSheetView>
-        {!isVisible && <Chip
-            titleStyle={{color: COLORS.cgrey, fontSize: 18,}}
-            title="Filtrer votre recherche"
-            icon={{
-              name: 'search', type: 'font-awesome', size: 20, color: COLORS.cgrey,
-            }}
-            onPress={handleToggleVisibility}
-            type="outline"
-            buttonStyle={{
-              backgroundColor: COLORS.fgrey,
-              height: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignSelf: "center",
-              width: "90%"
-            }}
-        />}
-        {isVisible && <ListingForm setDestination={setDestination}
-                                   setOrigin={setOrigin}
-                                   setDepartureDate={setDepartureDate}
-                                   departureDate={departureDate}
-                                   setWeight={setWeight}
-                                   weight={weight}
-                                   filterData={filterData}
-        />}
+        {!isVisible &&
+            <Chip
+                titleStyle={{color: COLORS.cgrey, fontSize: 18,}}
+                title="Filtrer votre recherche"
+                icon={{
+                  name: 'search', type: 'font-awesome', size: 20, color: COLORS.cgrey,
+                }}
+                onPress={handleToggleVisibility}
+                type="outline"
+                buttonStyle={{
+                  backgroundColor: COLORS.fgrey,
+                  height: 40,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: "center",
+                  width: "90%"
+                }}
+            />}
+        {isVisible &&
+            <ListingForm
+                setDestination={setDestination}
+                setOrigin={setOrigin}
+                setDepartureDate={setDepartureDate}
+                departureDate={departureDate}
+                setWeight={setWeight}
+                weight={weight}
+                filterData={filterData}
+            />}
       </BottomSheetView>
     </BottomSheet>
-
   </DynamicSafeAreaView>)
 }

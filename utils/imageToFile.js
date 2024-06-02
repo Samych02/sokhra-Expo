@@ -1,6 +1,6 @@
 import {Platform} from "react-native";
 
-const imageToFile = (image) => {
+export default function imageToFile(image) {
   return (
       {
         uri: Platform.OS === 'android' ? image.uri : 'file://' + image.uri,
@@ -9,6 +9,3 @@ const imageToFile = (image) => {
       }
   )
 }
-
-export default imageToFile;
-

@@ -8,10 +8,6 @@ import {useFonts} from "expo-font";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
-  // //todo do not forget!!
-  // return (
-  //     <Redirect href="/addListing"/>
-  // )
   const [appIsReady, setAppIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null)
   const setUserHomeProfile = homeProfileStore().setUserHomeProfile
@@ -63,11 +59,11 @@ export default function App() {
     return null;
   }
 
-
   if (isLoggedIn != null && appIsReady) {
     SplashScreen.hideAsync()
     return (
-        <Redirect href={isLoggedIn ? "/home" : "/login"}/>)
+        <Redirect href={isLoggedIn ? "/login" : "/login"}/>
+    )
   }
 
 }

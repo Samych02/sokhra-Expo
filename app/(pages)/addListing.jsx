@@ -65,17 +65,18 @@ export default function addListing() {
       <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
         <TouchableOpacity onPress={() => {
           router.back()
-        }} style={{
-          backgroundColor: COLORS.fgrey,
-          borderRadius: 20,
-          width: 40,
-          height: 40,
-          marginLeft: 15,
-          justifyContent: "center",
-          marginBottom: 5,
-          position: "absolute",
-          left: 0,
-        }}>
+        }}
+                          style={{
+                            backgroundColor: COLORS.fgrey,
+                            borderRadius: 20,
+                            width: 40,
+                            height: 40,
+                            marginLeft: 15,
+                            justifyContent: "center",
+                            marginBottom: 5,
+                            position: "absolute",
+                            left: 0,
+                          }}>
           <Ionicons
               name="chevron-back"
               style={{
@@ -83,35 +84,39 @@ export default function addListing() {
               }}
           />
         </TouchableOpacity>
-        <Text className="font-psemibold text-2xl text-white">Ajouter un voyage</Text>
+
+        <Text className="font-psemibold text-2xl text-white">
+          Ajouter un voyage
+        </Text>
       </View>
     </View>
-    <View className="items-center mt-8 mx-5 ">
-      <View className="bg-white w-full h-[65] justify-center mb-5"
-            style={{borderRadius: 10, borderColor: COLORS.brand, borderWidth: 2}}>
-        <CityPicker placeholder="Départ"
-                    type="default"
-                    setValue={setOrigin}
-                    iconName="airplane-takeoff"
-                    labelField="label"
-                    valueField="value"
-                    searchPlaceholder="Cherchez votre ville de départ"
-        />
-      </View>
-      <View className="bg-white w-full h-[65] justify-center mb-5"
-            style={{borderRadius: 10, borderColor: COLORS.brand, borderWidth: 2}}>
-        <CityPicker placeholder="Destination"
-                    type="default"
-                    setValue={setDestination}
-                    iconName="airplane-landing"
-                    labelField="label"
-                    valueField="value"
-                    searchPlaceholder="Cherchez votre ville de départ"
-        />
-      </View>
-      <View className="bg-white w-full h-[65] justify-center mb-5"
-            style={{borderRadius: 10, borderColor: COLORS.brand, borderWidth: 2}}>
 
+    <View className="items-center mt-8 mx-5 ">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+        <CityPicker
+            placeholder="Départ"
+            type="default"
+            setValue={setOrigin}
+            iconName="airplane-takeoff"
+            labelField="label"
+            valueField="value"
+            searchPlaceholder="Cherchez votre ville de départ"
+        />
+      </View>
+
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+        <CityPicker
+            placeholder="Destination"
+            type="default"
+            setValue={setDestination}
+            iconName="airplane-landing"
+            labelField="label"
+            valueField="value"
+            searchPlaceholder="Cherchez votre ville de départ"
+        />
+      </View>
+
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
         <TouchableOpacity onPress={() => setOpen(true)}>
           <Input
               disabledInputStyle={{fontSize: 20, opacity: 1}}
@@ -128,13 +133,14 @@ export default function addListing() {
               leftIconContainerStyle={{width: 30, height: 30, marginLeft: 5,}}
           />
         </TouchableOpacity>
-        <CustomDatePicker date={departureDate ? departureDate : new Date()} open={open} setDate={setDepartureDate}
-                          setOpen={setOpen}/>
+        <CustomDatePicker
+            date={departureDate ? departureDate : new Date()}
+            open={open}
+            setDate={setDepartureDate}
+            setOpen={setOpen}/>
       </View>
 
-      <View className="bg-white w-full h-[65] justify-center mb-5"
-            style={{borderRadius: 10, borderColor: COLORS.brand, borderWidth: 2}}>
-
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
         <Input
             inputStyle={{fontSize: 20}}
             placeholderTextColor={COLORS.cgrey}
@@ -152,9 +158,8 @@ export default function addListing() {
             leftIconContainerStyle={{width: 30, height: 30, marginLeft: 5,}}
         />
       </View>
-      <View className="bg-white w-full h-[65] justify-center mb-5"
-            style={{borderRadius: 10, borderColor: COLORS.brand, borderWidth: 2}}>
 
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
         <Input
             inputStyle={{fontSize: 20}}
             placeholderTextColor={COLORS.cgrey}
@@ -172,12 +177,17 @@ export default function addListing() {
             leftIconContainerStyle={{width: 30, height: 30, marginLeft: 5,}}
         />
       </View>
-      <TouchableOpacity className="justify-center items-center w-full h-11 bg-brand rounded-md" onPress={submit}
-      >
-        {loading ? <ActivityIndicator size="large" color="white"/> :
-            <Text className="text-white font-pmedium text-lg">Valider</Text>}
-      </TouchableOpacity>
 
+      <TouchableOpacity
+          className="justify-center items-center w-full h-11 bg-brand rounded-md"
+          onPress={submit}
+      >
+        {loading ?
+            <ActivityIndicator size="large" color="white"/> :
+            <Text className="text-white font-pmedium text-lg">
+              Valider
+            </Text>}
+      </TouchableOpacity>
     </View>
   </DynamicSafeAreaView>)
 }

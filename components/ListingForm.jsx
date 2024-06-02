@@ -32,14 +32,17 @@ export default function ListingForm({
               valueField="value"
               searchPlaceholder="Cherchez votre ville de départ"
           />
+
           <Divider color={COLORS.cgrey}/>
-          <CityPicker placeholder="Destination"
-                      type="modal"
-                      setValue={setDestination}
-                      iconName="airplane-landing"
-                      labelField="label"
-                      valueField="value"
-                      searchPlaceholder="Cherchez votre ville de déstination"
+
+          <CityPicker
+              placeholder="Destination"
+              type="modal"
+              setValue={setDestination}
+              iconName="airplane-landing"
+              labelField="label"
+              valueField="value"
+              searchPlaceholder="Cherchez votre ville de déstination"
           />
         </View>
 
@@ -50,14 +53,19 @@ export default function ListingForm({
             onPress={() => {
               filterData()
             }}>
-          <MaterialCommunityIcons name="magnify" size={70}
-                                  style={{color: "white",}}/>
+          <MaterialCommunityIcons
+              name="magnify"
+              size={70}
+              style={{color: "white",}}
+          />
         </TouchableOpacity>
       </View>
-      <View
-          style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7}}>
 
-        <TouchableOpacity onPress={() => setOpen(true)} style={{width: "48%"}}>
+      <View className="flex-row items-center justify-between mb-2">
+        <TouchableOpacity
+            onPress={() => setOpen(true)}
+            style={{width: "48%"}}
+        >
           <Input
               disabledInputStyle={{fontSize: 20, opacity: 1}}
               value={departureDate == null ? "" : dateToString(departureDate)}
@@ -73,8 +81,12 @@ export default function ListingForm({
               leftIconContainerStyle={{width: 30, height: 30, marginLeft: 5,}}
           />
         </TouchableOpacity>
-        <CustomDatePicker date={departureDate ? departureDate : new Date()} open={open} setDate={setDepartureDate}
-                          setOpen={setOpen}/>
+
+        <CustomDatePicker
+            date={departureDate ? departureDate : new Date()}
+            open={open} setDate={setDepartureDate}
+            setOpen={setOpen}
+        />
 
         <Input
             inputStyle={{fontSize: 20}}

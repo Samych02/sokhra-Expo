@@ -27,60 +27,101 @@ export default function Profile() {
   }, [])
 
   return (<DynamicSafeAreaView className="h-full bg-white">
-    {loading && <View className="h-full items-center justify-center"><ActivityIndicator color={COLORS.brand}
-                                                                                        size="large"/></View>}
-    {!loading && <>
-      <StatusBar backgroundColor={COLORS.brand} barStyle="default"/>
-      <View className="bg-brand h-[200]">
-        <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
-          <TouchableOpacity onPress={() => {
-            router.back()
-          }} style={{
-            backgroundColor: COLORS.fgrey,
-            borderRadius: 20,
-            width: 40,
-            height: 40,
-            marginLeft: 15,
-            justifyContent: "center",
-            marginBottom: 5,
-            position: "absolute",
-            left: 0,
-          }}>
-            <Ionicons
-                name="chevron-back"
-                style={{
-                  fontSize: 35, color: COLORS.cgrey
-                }}
+    {loading &&
+        <View className="h-full items-center justify-center">
+          <ActivityIndicator color={COLORS.brand} size="large"/>
+        </View>
+    }
+
+    {!loading &&
+        <>
+          <StatusBar backgroundColor={COLORS.brand} barStyle="default"/>
+          <View className="bg-brand h-[200]">
+            <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
+              <TouchableOpacity
+                  onPress={() => {
+                    router.back()
+                  }}
+                  style={{
+                    backgroundColor: COLORS.fgrey,
+                    borderRadius: 20,
+                    width: 40,
+                    height: 40,
+                    marginLeft: 15,
+                    justifyContent: "center",
+                    marginBottom: 5,
+                    position: "absolute",
+                    left: 0,
+                  }}>
+                <Ionicons
+                    name="chevron-back"
+                    style={{
+                      fontSize: 35, color: COLORS.cgrey
+                    }}
+                />
+              </TouchableOpacity>
+
+              <Text className="font-psemibold text-2xl text-white">
+                {capitalizeFirstLetter(userData.firstName)}
+              </Text>
+
+              {userID == null &&
+                  <Text className="font-pmedium text-lg text-cgrey bg-white rounded-xl p-1 absolute right-0 mr-[15]">
+                    Modifier
+                  </Text>}
+            </View>
+
+            <View className="items-center mb-4">
+              <Avatar
+                  size={100}
+                  rounded
+                  source={{uri: `${domainName}/user/profile/image/${userData.id}`}}
+              />
+            </View>
+
+            <View className="items-center flex-row justify-center">
+              <Text className="font-pmedium text-lg text-fgrey absolute left-8">
+                {userData.shipmentsCount} Expéditions
+              </Text>
+
+              <Text className="font-pmedium text-lg text-fgrey">
+                |
+              </Text>
+              <Text className="font-pmedium text-lg text-fgrey absolute right-8">
+                {userData.tripsCount} Voyages
+              </Text>
+            </View>
+          </View>
+
+          <View className="flex-row items-center justify-between mx-3 mb-2">
+            <View className="flex-row items-end mt-5 mb-2">
+              <Text className="font-pbold text-lg text-cgrey">
+                Reviews&nbsp;
+              </Text>
+
+              <Text className="font-pbold text-2xl ">
+                {userData.rating.numberOfRatings}
+              </Text>
+            </View>
+
+            <Rating
+                rating={userData.rating.ratingValue}
+                size={24}
+                scale={1}
+                spacing={3}
+                disabled={true}
+                baseColor={COLORS.cgrey}
+                style={{marginTop: 6}}
             />
-          </TouchableOpacity>
-          <Text className="font-psemibold text-2xl text-white">{capitalizeFirstLetter(userData.firstName)}</Text>
-          {userID == null && <Text
-              className="font-pmedium text-lg text-cgrey bg-white rounded-xl p-1 absolute right-0 mr-[15]">Modifier</Text>}
-        </View>
-        <View className="items-center mb-4">
-          <Avatar size={100} rounded source={{uri: `${domainName}/user/profile/image/${userData.id}`}}/>
-        </View>
-        <View className="items-center flex-row justify-center">
-          <Text className="font-pmedium text-lg text-fgrey absolute left-8">{userData.shipmentsCount} Expéditions</Text>
-          <Text className="font-pmedium text-lg text-fgrey">|</Text>
-          <Text className="font-pmedium text-lg text-fgrey absolute right-8">{userData.tripsCount} Voyages</Text>
-        </View>
-      </View>
-      <View className="flex-row items-center justify-between mx-3 mb-2">
-        <View className="flex-row items-end mt-5 mb-2">
-          <Text className="font-pbold text-lg text-cgrey">Reviews </Text>
-          <Text className="font-pbold text-2xl ">{userData.rating.numberOfRatings}</Text>
-        </View>
-        <Rating rating={userData.rating.ratingValue} size={24} scale={1} spacing={3} disabled={true}
-                baseColor={COLORS.cgrey} style={{marginTop: 6}}/>
-      </View>
-      <FlatList data={userData.ratings} renderItem={(item) => ReviewCard(item)}
-                contentContainerStyle={{
-                  paddingBottom: 10
-                }}
-      />
-    </>}
+          </View>
 
-
+          <FlatList
+              data={userData.ratings}
+              renderItem={(item) => ReviewCard(item)}
+              contentContainerStyle={{
+                paddingBottom: 10
+              }}
+          />
+        </>}
   </DynamicSafeAreaView>)
 }

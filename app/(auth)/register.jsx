@@ -41,7 +41,6 @@ export default function register() {
       return
     }
     setLoading(true)
-
     const formData = new FormData()
     formData.append("firstName", firstName)
     formData.append("lastName", lastName)
@@ -59,11 +58,18 @@ export default function register() {
   }
 
   return (<DynamicSafeAreaView className="h-full bg-white">
-    <TouchableOpacity onPress={() => {
-      router.navigate("/login")
-    }} style={{
-      backgroundColor: COLORS.fgrey, borderRadius: 20, width: 40, height: 40, marginLeft: 15, justifyContent: "center"
-    }}>
+    <TouchableOpacity
+        onPress={() => {
+          router.navigate("/login")
+        }}
+        style={{
+          backgroundColor: COLORS.fgrey,
+          borderRadius: 20,
+          width: 40,
+          height: 40,
+          marginLeft: 15,
+          justifyContent: "center"
+        }}>
       <Ionicons
           name="close"
           style={{
@@ -71,45 +77,59 @@ export default function register() {
           }}
       />
     </TouchableOpacity>
-    <Text className="text-center font-psemibold text-2xl mt-10 mb-10">Complétez votre profile pour continuer</Text>
+
+    <Text className="text-center font-psemibold text-2xl mt-10 mb-10">
+      Complétez votre profile pour continuer
+    </Text>
+
     <ScrollView>
       <View className="items-center pb-5">
-        {!image && <Avatar
-            size={150}
-            rounded
-            containerStyle={{backgroundColor: "#c0c2c6", paddingTop: 20}}
-            icon={{name: "person-fill", type: "octicon", size: 150}}>
-          <Avatar.Accessory size={30} name="camera" type="entypo" color={"white"}
-                            onPress={pickImage}
-                            style={{
-                              backgroundColor: COLORS.cgrey,
-                              width: 50,
-                              height: 50,
-                              borderRadius: 25,
-                              borderWidth: 3,
-                              borderColor: "white",
-                              shadowColor: "white"
-                            }}/>
-        </Avatar>}
-        {image && <Avatar
-            size={150}
-            rounded
-            source={{uri: image.uri}}>
-          <Avatar.Accessory size={30} name="camera" type="entypo" color={"white"}
-                            onPress={pickImage}
-                            style={{
-                              backgroundColor: COLORS.cgrey,
-                              width: 50,
-                              height: 50,
-                              borderRadius: 25,
-                              borderWidth: 3,
-                              borderColor: "white",
-                              shadowColor: "white"
-                            }}/>
-        </Avatar>}
-      </View>
-      <View className="mx-3 mt-5">
+        {!image &&
+            <Avatar
+                size={150}
+                rounded
+                containerStyle={{backgroundColor: "#c0c2c6", paddingTop: 20}}
+                icon={{
+                  name: "person-fill", type: "octicon", size: 150
+                }}>
+              <Avatar.Accessory size={30} name="camera" type="entypo" color={"white"}
+                                onPress={pickImage}
+                                style={{
+                                  backgroundColor: COLORS.cgrey,
+                                  width: 50,
+                                  height: 50,
+                                  borderRadius: 25,
+                                  borderWidth: 3,
+                                  borderColor: "white",
+                                  shadowColor: "white"
+                                }}/>
+            </Avatar>}
 
+        {image &&
+            <Avatar
+                size={150}
+                rounded
+                source={{
+                  uri: image.uri
+                }}>
+              <Avatar.Accessory size={30}
+                                name="camera"
+                                type="entypo"
+                                color={"white"}
+                                onPress={pickImage}
+                                style={{
+                                  backgroundColor: COLORS.cgrey,
+                                  width: 50,
+                                  height: 50,
+                                  borderRadius: 25,
+                                  borderWidth: 3,
+                                  borderColor: "white",
+                                  shadowColor: "white"
+                                }}/>
+            </Avatar>}
+      </View>
+
+      <View className="mx-3 mt-5">
         <TextInput
             returnKeyType="next"
             onSubmitEditing={() => {
@@ -126,6 +146,7 @@ export default function register() {
             onChangeText={lastName => setLastName(lastName)}
             activeOutlineColor={COLORS.brand}
         />
+
         <TextInput
             ref={(input) => {
               this.secondTextInput = input;
@@ -140,10 +161,17 @@ export default function register() {
             onChangeText={firstName => setFirstName(firstName)}
             activeOutlineColor={COLORS.brand}
         />
-        <TouchableOpacity className="justify-center items-center w-full h-11 bg-brand rounded-md" onPress={submit}
+
+        <TouchableOpacity
+            className="justify-center items-center w-full h-11 bg-brand rounded-md"
+            onPress={submit}
         >
-          {loading ? <ActivityIndicator size="large" color="white"/> :
-              <Text className="text-white font-pmedium text-lg">Valider</Text>}
+          {loading ?
+              <ActivityIndicator size="large" color="white"/>
+              :
+              <Text className="text-white font-pmedium text-lg">
+                Valider
+              </Text>}
         </TouchableOpacity>
       </View>
     </ScrollView>

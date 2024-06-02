@@ -3,7 +3,7 @@ import auth from "@react-native-firebase/auth";
 import {Alert} from "react-native";
 import domainName from "../constants/domainName";
 
-const sendAuthenticatedRequest = async (method, path, data = null, isJsonData = false, isMultiPartForm = false, params = null,) => {
+export default async function sendAuthenticatedRequest(method, path, data = null, isJsonData = false, isMultiPartForm = false, params = null,) {
   const headers = {
     "Authorization": `Bearer ${await auth().currentUser.getIdToken(true)}`,
   }
@@ -23,4 +23,3 @@ const sendAuthenticatedRequest = async (method, path, data = null, isJsonData = 
     return null
   }
 }
-export default sendAuthenticatedRequest

@@ -1,4 +1,4 @@
-const dateToString = (date) => {
+export default function dateToString(date) {
   let day = date.getDate()
   let month = date.getMonth() + 1
   const year = date.getFullYear()
@@ -10,4 +10,3 @@ const dateToString = (date) => {
   }
   return `${day}/${month}/${year}`
 }
-export default dateToString
