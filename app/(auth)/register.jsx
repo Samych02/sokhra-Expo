@@ -46,10 +46,8 @@ export default function register() {
     formData.append("firstName", firstName)
     formData.append("lastName", lastName)
     formData.append("profilePicture", imageToFile(image))
-    const data = await sendAuthenticatedRequest("post", "/user/register", formData, false, true)
-    if (data.created) {
-      await setItem("isLoggedIn", "true")
-      setLoading(false)
+    const response = await sendAuthenticatedRequest("post", "/user/register", formData, false, true)
+    if (response.created) {
       await setItem("isLoggedIn", "true")
       while (router.canGoBack()) {
         router.back()

@@ -23,15 +23,18 @@ export default function ListingForm({
     <View className="mx-3 mt-5">
       <View className="flex-row items-center justify-center mb-5">
         <View className="bg-white" style={{borderRadius: 10, width: "80%"}}>
-          <CityPicker placeholder="Départ"
-                      setValue={setOrigin}
-                      iconName="airplane-takeoff"
-                      labelField="label"
-                      valueField="value"
-                      searchPlaceholder="Cherchez votre ville de départ"
+          <CityPicker
+              type="modal"
+              placeholder="Départ"
+              setValue={setOrigin}
+              iconName="airplane-takeoff"
+              labelField="label"
+              valueField="value"
+              searchPlaceholder="Cherchez votre ville de départ"
           />
           <Divider color={COLORS.cgrey}/>
           <CityPicker placeholder="Destination"
+                      type="modal"
                       setValue={setDestination}
                       iconName="airplane-landing"
                       labelField="label"
@@ -65,7 +68,7 @@ export default function ListingForm({
               containerStyle={{
                 backgroundColor: "white", paddingHorizontal: 0, borderRadius: 10,
               }}
-              placeholder="Date"
+              placeholder="Date de départ"
               leftIcon={<MaterialCommunityIcons name="calendar-clock" size={25} color={COLORS.cgrey}/>}
               leftIconContainerStyle={{width: 30, height: 30, marginLeft: 5,}}
           />

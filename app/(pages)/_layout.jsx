@@ -10,13 +10,13 @@ export default function AppLayout() {
           <Stack
               screenOptions={{
                 headerShown: false,
-                // cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
               }}>
-            <Stack.Screen name="home" options={{headerShown: false}}></Stack.Screen>
-            <Stack.Screen name="listings" options={{headerShown: false}}></Stack.Screen>
-            {/*<Stack.Screen name="chatList" options={{headerShown: false}}></Stack.Screen>*/}
-            {/*<Stack.Screen name="chatScreen" options={{headerShown: false}}></Stack.Screen>*/}
-            <Stack.Screen name="test" options={{headerShown: false}}></Stack.Screen>
+            {/*<Stack.Screen name="home" options={{headerShown: false}}></Stack.Screen>*/}
+            {/*<Stack.Screen name="listings" options={{headerShown: false}}></Stack.Screen>*/}
+            {/*<Stack.Screen name="addListings" options={{headerShown: false}}></Stack.Screen>*/}
+            {/*/!*<Stack.Screen name="chatList" options={{headerShown: false}}></Stack.Screen>*!/*/}
+            {/*/!*<Stack.Screen name="chatScreen" options={{headerShown: false}}></Stack.Screen>*!/*/}
+            {/*<Stack.Screen name="test" options={{headerShown: false}}></Stack.Screen>*/}
           </Stack>
         </View>
       </GestureHandlerRootView>

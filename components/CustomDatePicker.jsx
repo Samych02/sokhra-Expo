@@ -3,6 +3,9 @@ import DatePicker from "react-native-date-picker";
 import React from "react";
 
 export default function CustomDatePicker({open, setOpen, date, setDate}) {
+  const yesterdayDate = new Date()
+  yesterdayDate.setHours(0, 0, 0, 0)
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   return (
       <DatePicker
           title="Selectionner une date"
@@ -16,7 +19,7 @@ export default function CustomDatePicker({open, setOpen, date, setDate}) {
           date={date}
           onConfirm={(date) => {
             setOpen(false)
-            if (date < new Date()) return Alert.alert("La date sélectionnée est inférieure à celle d' aujourd'hui")
+            if (date < yesterdayDate) return Alert.alert("La date sélectionnée est inférieure à celle d'aujourd'hui")
             setDate(date)
           }}
           onCancel={() => {

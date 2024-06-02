@@ -59,7 +59,7 @@ export default function Listings() {
           originCountry: (origin == null) ? null : origin.country,
           destinationCity: (destination == null) ? null : destination.city,
           destinationCountry: (destination == null) ? null : destination.country,
-          departureDate: (departureDate == null) ? null : departureDate.toString(),
+          departureDate: (departureDate == null) ? null : departureDate.toISOString().split("T")[0],
           weight: (weight == null || weight === "") ? null : parseInt(weight)
         })
     // if no results found

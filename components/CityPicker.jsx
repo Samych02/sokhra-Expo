@@ -7,7 +7,7 @@ import COLORS from "../constants/colors";
 import defaultCities from "../constants/defaultCities";
 
 
-export default function CityPicker({placeholder, iconName, setValue, searchPlaceholder}) {
+export default function CityPicker({placeholder, iconName, setValue, searchPlaceholder, type}) {
   const [data, setData] = useState(defaultCities)
 
 
@@ -28,7 +28,7 @@ export default function CityPicker({placeholder, iconName, setValue, searchPlace
 
   return (
       <Dropdown
-          mode="modal"
+          mode={type}
           data={data}
           labelField="label"
           valueField="value"
