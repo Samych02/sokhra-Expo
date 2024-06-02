@@ -27,8 +27,10 @@ export default function otp() {
         return router.navigate("/register")
       }
       await setItem("isLoggedIn", "true")
-      return router.navigate("/home")
-
+      while (router.canGoBack()) {
+        router.back()
+      }
+      return router.replace("/")
     } catch (error) {
       setLoginLoading(false)
       Alert.alert("code incorrect")

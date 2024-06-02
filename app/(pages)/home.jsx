@@ -4,6 +4,10 @@ import COLORS from "../../constants/colors";
 import {LayoutAnimation, Platform, Text, TouchableOpacity, UIManager, View} from "react-native";
 import {useState} from "react";
 import {router} from "expo-router";
+import homeProfileStore from "../../store/homeProfileStore";
+import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
+import domainName from "../../constants/domainName";
+import logout from "../../utils/logout";
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -11,6 +15,7 @@ if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental
 
 export default function Home() {
   const [expanded, setExpanded] = useState(false);
+  const userHomeProfile = homeProfileStore().userHomeProfile
 
   const toggleHeight = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -20,7 +25,6 @@ export default function Home() {
         <View style={{
           position: 'absolute', top: 70, left: 0, right: 0, justifyContent: 'center', alignItems: 'center'
         }}>
-
           <View className="px-5 rounded-3xl py-6 bg-fgrey"
                 style={{zIndex: 1, width: '80%', height: (expanded) ? 310 : ""}}>
 
@@ -28,13 +32,19 @@ export default function Home() {
               <Icon pressableProps={{backgroundColor: "transparent"}} name={expanded ? "x" : "menu"} type="feather"
                     color={COLORS.cgrey} containerStyle={{alignContent: "flex-start", activeOpacity: 1}}
                     onPress={toggleHeight}/>
-              <View className="flex-row items-center">
-                <Avatar size={45} rounded source={require('../test.png')} containerStyle={{marginRight: 10}}/>
-                <View className="flex-col justify-evenly">
-                  <Text className="text-xs font-pmedium ">Hello</Text>
-                  <Text className="text-lg font-pbold">Samy</Text>
+              <TouchableOpacity onPress={() => {
+                setExpanded(false)
+                router.push("/profile")
+              }}>
+                <View className="flex-row items-center">
+                  <Avatar size={45} rounded source={{uri: `${domainName}/user/profile/image/${userHomeProfile.id}`}}
+                          containerStyle={{marginRight: 10}}/>
+                  <View className="flex-col justify-evenly">
+                    <Text className="text-xs  " style={{fontFamily: "Poppins-Bold"}}>Bonjour</Text>
+                    <Text className="text-lg font-pbold">{capitalizeFirstLetter((userHomeProfile.firstName))}</Text>
+                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
 
               <View className="flex-row items-center">
                 <Icon name="chat" type="material-community" color={COLORS.cgrey} containerStyle={{alignSelf: "center"}}
@@ -60,18 +70,21 @@ export default function Home() {
                   <Text className="text-2xl font-pmedium text-black">Mes voyages</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{marginVertical: 10}} onPress={() => console.log(1)}>
+              <TouchableOpacity style={{marginVertical: 10}} onPress={() => {
+                setExpanded(false)
+                router.push("/profile")
+              }}>
                 <View className="flex-row items-center ">
                   <Icon name="account-outline" type="material-community" color={COLORS.cgrey} size={35}
                         containerStyle={{marginRight: 10}}/>
                   <Text className="text-2xl font-pmedium text-black">Mon profil</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{marginVertical: 10}} onPress={() => console.log(1)}>
+              <TouchableOpacity style={{marginVertical: 10}} onPress={() => logout()}>
                 <View className="flex-row items-center ">
-                  <Icon name="logout" type="material" color={COLORS.cgrey} size={35}
+                  <Icon name="logout" type="material" color={COLORS.nred} size={35}
                         containerStyle={{marginRight: 10}}/>
-                  <Text className="text-2xl font-pmedium text-black">Se déconnecter</Text>
+                  <Text className="text-2xl font-pmedium text-nred">Se déconnecter</Text>
                 </View>
               </TouchableOpacity>
 

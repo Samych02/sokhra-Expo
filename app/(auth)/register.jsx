@@ -50,7 +50,11 @@ export default function register() {
     if (data.created) {
       await setItem("isLoggedIn", "true")
       setLoading(false)
-      return router.navigate("/home")
+      await setItem("isLoggedIn", "true")
+      while (router.canGoBack()) {
+        router.back()
+      }
+      return router.replace("/")
     } else {
       setLoading(false)
     }

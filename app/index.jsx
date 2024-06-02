@@ -1,16 +1,38 @@
 import {getItem} from "../utils/asyncStorage";
-import {useMemo, useState} from "react";
-import {Redirect} from "expo-router";
+import {useEffect, useState} from "react";
+import {Redirect, SplashScreen} from "expo-router";
 import auth from "@react-native-firebase/auth";
+import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
+import homeProfileStore from "../store/homeProfileStore";
+import {useFonts} from "expo-font";
 
+SplashScreen.preventAutoHideAsync();
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const setUserHomeProfile = homeProfileStore().setUserHomeProfile
+
+  const [loaded] = useFonts({
+    "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/Poppins-ExtraBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/Poppins-ExtraLight.ttf"),
+    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
+  })
+
+  async function getProfileForHome() {
+    const response = await sendAuthenticatedRequest("get", "/user/profile/home")
+    setUserHomeProfile(response.profile)
+  }
 
   async function checkIfLoggedIn() {
-    // console.log(await auth().currentUser.getIdToken(true))
-
     if ((await getItem("isLoggedIn")) != null) {
       setIsLoggedIn(true)
+      await getProfileForHome()
       return
     }
 
@@ -21,12 +43,33 @@ export default function App() {
     }
     setIsLoggedIn(false)
   }
-  useMemo(async () => {
-    await checkIfLoggedIn()
-  }, [])
 
-  // wait until isLoggedIn is set
-  if (isLoggedIn != null) {
-    return <Redirect href={isLoggedIn ? "/home" : "/login"}/>
+  useEffect(() => {
+        async function prepare() {
+          await checkIfLoggedIn()
+          setAppIsReady(true)
+        }
+
+        prepare()
+      }, [loaded]
+  )
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (appIsReady) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [appIsReady])
+
+  if (!appIsReady) {
+    return null;
   }
+
+
+  if (isLoggedIn != null && appIsReady) {
+    SplashScreen.hideAsync()
+    return (
+        <Redirect href={isLoggedIn ? "/home" : "/login"}/>
+    )
+  }
+
 }

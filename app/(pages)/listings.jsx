@@ -46,7 +46,6 @@ export default function Listings() {
     setPage(0)
     setIsEmpty(false)
     setIsLastPage(false)
-    // await fetchData()
   }
 
   const fetchData = async () => {
@@ -59,11 +58,10 @@ export default function Listings() {
           originCity: (origin == null) ? null : origin.city,
           originCountry: (origin == null) ? null : origin.country,
           destinationCity: (destination == null) ? null : destination.city,
-          destinationCountry: (destination == null) ? null : destination.city,
+          destinationCountry: (destination == null) ? null : destination.country,
           departureDate: (departureDate == null) ? null : departureDate.toString(),
           weight: (weight == null || weight === "") ? null : parseInt(weight)
         })
-    console.log(response)
     // if no results found
     if (page === 0 && response.tripPage.empty) setIsEmpty(true)
     setPage(page + 1)
@@ -113,7 +111,6 @@ export default function Listings() {
     }}
     />}
     {!loading && !isEmpty && <FlatList data={listingData} renderItem={(item) => TravelCard(item)}
-                                       keyExtractor={item => item.id}
                                        contentContainerStyle={{
                                          paddingBottom: 90
                                        }}

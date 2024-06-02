@@ -6,6 +6,7 @@ import {Entypo, MaterialCommunityIcons} from "@expo/vector-icons";
 import {Rating} from "@kolking/react-native-rating";
 import React from "react";
 import domainName from "../constants/domainName";
+import {router} from "expo-router";
 
 const TravelCard = ({item}) => {
   return (<View className="w-full">
@@ -42,7 +43,7 @@ const TravelCard = ({item}) => {
       <Card.Divider color={COLORS.cgrey} width={1} style={{marginBottom: 8}}/>
       <View className="flex-row justify-between ">
         <TouchableOpacity className="flex-row items-center" onPress={() => {
-          router.navigate("/profile", {"id": item.traveller.id})
+          router.push({pathname: "/profile", params: {userID: item.traveller.id}})
         }}>
           <Avatar source={{uri: `${domainName}/user/profile/image/${item.traveller.id}`}} size={35} rounded={true}/>
           <View className="flex-col ml-4 h-full">

@@ -45,7 +45,6 @@
           }
         }
       ],
-      "expo-font",
       [
         "expo-image-picker",
         {
