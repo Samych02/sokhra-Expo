@@ -15,14 +15,14 @@ export default function otp() {
   const [numberOfSeconds, setNumberOfSeconds] = useState(30)
   const [loading, setLoading] = useState(false)
   const [loginLoading, setLoginLoading] = useState(false)
-  const {confirm, setConfirm} = confirmStore();
+  const {confirm, setConfirm} = confirmStore()
 
   async function confirmCode(code) {
     try {
       setLoginLoading(true)
       await confirm.confirm(code)
-      const data = await sendAuthenticatedRequest("get", "/user/register/shouldRegister")
-      if (data.shouldRegister) {
+      const response = await sendAuthenticatedRequest("get", "/user/register/shouldRegister")
+      if (response.shouldRegister) {
         return router.navigate("/register")
       }
       await setItem("isLoggedIn", "true")
@@ -86,7 +86,7 @@ export default function otp() {
     </Text>
 
     <Text className="text-center font-pregular mx-10 mb-10">
-      Un code de vérification a été envoyé à {parsedPhoneNumber.replace(" ", "\u00A0")}
+      {/*Un code de vérification a été envoyé à {parsedPhoneNumber.replace(" ", "\u00A0")}*/}
     </Text>
 
     <View className="mx-4 mb-10">

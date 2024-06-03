@@ -8,7 +8,7 @@ import React from "react";
 import domainName from "../constants/domainName";
 import {router} from "expo-router";
 
-const TravelCard = ({item}) => {
+export default function TravelCard({item}) {
   return (
       <View className="w-full">
         <Card containerStyle={{
@@ -136,4 +136,3 @@ const TravelCard = ({item}) => {
         </Card>
       </View>)
 }
-export default TravelCard;

@@ -86,19 +86,12 @@ export default function Listings() {
 
   return (<DynamicSafeAreaView className="h-full bg-white">
     <TouchableOpacity
+        className="bg-fgrey rounded-[20px] w-10 h-10 ml-[15] justify-center mb-[5] left-0"
         onPress={() => {
           bottomSheetRef.current.snapToIndex(0)
           router.navigate("/home")
         }}
-        style={{
-          backgroundColor: COLORS.fgrey,
-          borderRadius: 20,
-          width: 40,
-          height: 40,
-          marginLeft: 15,
-          justifyContent: "center",
-          marginBottom: 5
-        }}>
+    >
       <Ionicons
           name="chevron-back"
           style={{

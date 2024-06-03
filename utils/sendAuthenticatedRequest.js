@@ -18,8 +18,7 @@ export default async function sendAuthenticatedRequest(method, path, data = null
   })
   if (response.data.status === "success") {
     return response.data.data
-  } else {
+  } else if (response.data.status === "error") {
     Alert.alert(response.data.statusText)
-    return null
   }
 }

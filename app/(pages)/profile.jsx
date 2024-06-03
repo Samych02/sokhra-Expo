@@ -39,20 +39,11 @@ export default function Profile() {
           <View className="bg-brand h-[200]">
             <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
               <TouchableOpacity
+                  className="bg-fgrey rounded-[20px] w-10 h-10 ml-[15] justify-center mb-[5] absolute left-0"
                   onPress={() => {
                     router.back()
                   }}
-                  style={{
-                    backgroundColor: COLORS.fgrey,
-                    borderRadius: 20,
-                    width: 40,
-                    height: 40,
-                    marginLeft: 15,
-                    justifyContent: "center",
-                    marginBottom: 5,
-                    position: "absolute",
-                    left: 0,
-                  }}>
+              >
                 <Ionicons
                     name="chevron-back"
                     style={{

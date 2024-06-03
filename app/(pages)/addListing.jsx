@@ -57,7 +57,7 @@ export default function addListing() {
       Alert.alert("Voyage ajouté avec succès.", null, [{
         text: 'OK', onPress: () => {
           console.log(123)
-          router.back()
+          router.navigate("myTrips")
         }
       }])
     }
@@ -68,20 +68,12 @@ export default function addListing() {
     <StatusBar backgroundColor={COLORS.brand} barStyle="default"/>
     <View className="bg-brand h-[50]">
       <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
-        <TouchableOpacity onPress={() => {
-          router.back()
-        }}
-                          style={{
-                            backgroundColor: COLORS.fgrey,
-                            borderRadius: 20,
-                            width: 40,
-                            height: 40,
-                            marginLeft: 15,
-                            justifyContent: "center",
-                            marginBottom: 5,
-                            position: "absolute",
-                            left: 0,
-                          }}>
+        <TouchableOpacity
+            className="bg-fgrey rounded-[20px] w-10 h-10 ml-[15] justify-center mb-[5] absolute left-0"
+            onPress={() => {
+              router.back()
+            }}
+        >
           <Ionicons
               name="chevron-back"
               style={{

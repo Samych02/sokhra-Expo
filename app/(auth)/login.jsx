@@ -5,8 +5,8 @@ import DynamicSafeAreaView from "../../components/DynamicSafeAreaView"
 import validatePhoneNumber from "../../utils/validatePhoneNumber"
 import parseValidePhoneNumber from "../../utils/parseValidePhoneNumber"
 import {router} from "expo-router"
-import loginWithPhoneNumber from "../../utils/loginWithPhoneNumber";
-import confirmStore from "../../store/confirmStore";
+import loginWithPhoneNumber from "../../utils/loginWithPhoneNumber"
+import confirmStore from "../../store/confirmStore"
 
 export default function login() {
   const [countryCode, setCountryCode] = useState(null)

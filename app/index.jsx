@@ -8,6 +8,7 @@ import {useFonts} from "expo-font";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
+  // return <Redirect href="otp"/>
   const [appIsReady, setAppIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null)
   const setUserHomeProfile = homeProfileStore().setUserHomeProfile

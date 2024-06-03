@@ -113,7 +113,7 @@ export default function Home() {
 
                   <TouchableOpacity
                       style={{marginVertical: 10}}
-                      onPress={() => console.log(1)}
+                      onPress={() => router.navigate("myTrips")}
                   >
                     <View className="flex-row items-center ">
                       <Icon
