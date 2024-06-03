@@ -210,11 +210,12 @@ export default function Home() {
               name="add"
               type="ionicon"
               color="white"
+              onPress={() => router.navigate("addListing")}
               containerStyle={{backgroundColor: COLORS.brand, padding: 10, alignSelf: "center", borderRadius: 20}}
           />
 
           <Text className="font-pextrabold text-center text-xl mt-5">
-            Ajouter une annonce
+            Publier une annonce
           </Text>
         </View>
       </DynamicSafeAreaView>

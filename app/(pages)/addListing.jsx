@@ -54,7 +54,12 @@ export default function addListing() {
     if (response.created) {
       setLoading(false)
       //todo navigate to trips page
-      Alert.alert("Voyage ajouté avec succès.", null, [{text: 'OK', onPress: () => router.back}])
+      Alert.alert("Voyage ajouté avec succès.", null, [{
+        text: 'OK', onPress: () => {
+          console.log(123)
+          router.back()
+        }
+      }])
     }
   }
 
@@ -86,13 +91,13 @@ export default function addListing() {
         </TouchableOpacity>
 
         <Text className="font-psemibold text-2xl text-white">
-          Ajouter un voyage
+          Publier une annonce
         </Text>
       </View>
     </View>
 
     <View className="items-center mt-8 mx-5 ">
-      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10px] border-brand border-2">
         <CityPicker
             placeholder="Départ"
             type="default"
@@ -104,7 +109,7 @@ export default function addListing() {
         />
       </View>
 
-      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10px] border-brand border-2">
         <CityPicker
             placeholder="Destination"
             type="default"
@@ -116,7 +121,7 @@ export default function addListing() {
         />
       </View>
 
-      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10px] border-brand border-2">
         <TouchableOpacity onPress={() => setOpen(true)}>
           <Input
               disabledInputStyle={{fontSize: 20, opacity: 1}}
@@ -140,7 +145,7 @@ export default function addListing() {
             setOpen={setOpen}/>
       </View>
 
-      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10px] border-brand border-2">
         <Input
             inputStyle={{fontSize: 20}}
             placeholderTextColor={COLORS.cgrey}
@@ -159,7 +164,7 @@ export default function addListing() {
         />
       </View>
 
-      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10] border-brand border-2">
+      <View className="bg-white w-full h-[65] justify-center mb-5 rounded-[10px] border-brand border-2">
         <Input
             inputStyle={{fontSize: 20}}
             placeholderTextColor={COLORS.cgrey}

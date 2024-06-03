@@ -2,7 +2,7 @@ import DynamicSafeAreaView from "../../components/DynamicSafeAreaView";
 import COLORS from "../../constants/colors";
 import {router} from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useMemo, useRef, useState} from "react";
 import {ActivityIndicator, FlatList, Text, TouchableOpacity, View} from "react-native";
 import SkeletonTravelCard from "../../components/SkeletonTravelCard";
 import TravelCard from "../../components/TravelCard";
@@ -76,13 +76,13 @@ export default function Listings() {
     let newArray = [...listingData, ...response.tripPage.content]
     setListingData(newArray)
 
-    setLoading(false);
-    setLoadingMore(false);
+    setLoading(false)
+    setLoadingMore(false)
   }
 
-  useEffect(() => {
+  useMemo(() => {
     fetchData()
-  }, []);
+  }, [])
 
   return (<DynamicSafeAreaView className="h-full bg-white">
     <TouchableOpacity
@@ -135,6 +135,7 @@ export default function Listings() {
                     <ActivityIndicator size="large" color={COLORS.brand}/>
                   </View>)
             }}
+            keyExtractor={(item, index) => index}
             onEndReached={fetchData}
         />}
 

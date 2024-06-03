@@ -62,7 +62,7 @@ export default function App() {
   if (isLoggedIn != null && appIsReady) {
     SplashScreen.hideAsync()
     return (
-        <Redirect href={isLoggedIn ? "/login" : "/login"}/>
+        <Redirect href={isLoggedIn ? "/home" : "/login"}/>
     )
   }
 
