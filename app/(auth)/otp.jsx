@@ -86,7 +86,7 @@ export default function otp() {
     </Text>
 
     <Text className="text-center font-pregular mx-10 mb-10">
-      {/*Un code de vérification a été envoyé à {parsedPhoneNumber.replace(" ", "\u00A0")}*/}
+      Un code de vérification a été envoyé à {parsedPhoneNumber.replace(" ", "\u00A0")}
     </Text>
 
     <View className="mx-4 mb-10">

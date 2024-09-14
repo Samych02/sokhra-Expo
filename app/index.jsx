@@ -6,13 +6,8 @@ import sendAuthenticatedRequest from "../utils/sendAuthenticatedRequest";
 import homeProfileStore from "../store/homeProfileStore";
 import {useFonts} from "expo-font";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 export default function App() {
-  // return <Redirect href="otp"/>
-  const [appIsReady, setAppIsReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(null)
-  const setUserHomeProfile = homeProfileStore().setUserHomeProfile
-
   const [loaded] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
@@ -24,6 +19,11 @@ export default function App() {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   })
+  return <Redirect href="tripReservations"/>
+  const [appIsReady, setAppIsReady] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const setUserHomeProfile = homeProfileStore().setUserHomeProfile
+
 
   async function getProfileForHome() {
     const response = await sendAuthenticatedRequest("get", "/user/profile/home")

@@ -18,10 +18,7 @@
     },
     "android": {
       "package": "me.sokhra",
-      "googleServicesFile": "./config/google-services.json",
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "googleServicesFile": "./config/google-services.json"
     },
     "plugins": [
       "expo-router",
@@ -32,9 +29,6 @@
         {
           "ios": {
             "useFrameworks": "static"
-          },
-          "android": {
-            "usesCleartextTraffic": true
           }
         }
       ],

@@ -1,3 +1,3 @@
-const domainName = "http://10.0.2.2:8080"
+const domainName = "https://sokhra.me"
 
 export default domainName;

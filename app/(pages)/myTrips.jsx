@@ -40,26 +40,24 @@ export default function MyTrips() {
 
   return (<DynamicSafeAreaView className="h-full bg-white">
     <StatusBar backgroundColor={COLORS.brand} barStyle="default"/>
-    <View className="bg-brand h-[50]">
-      <View className="flex-row items-center justify-center w-full mt-1.5 mb-3">
-        <TouchableOpacity
-            className="bg-fgrey rounded-[20px] w-10 h-10 ml-[15] justify-center mb-[5] absolute left-0"
-            onPress={() => {
-              router.navigate("/home")
+    <View className="flex-row items-center justify-center w-full mb-3 bg-brand h-[50]">
+      <TouchableOpacity
+          className="bg-fgrey rounded-[20px] w-10 h-10 ml-[15] justify-center mb-[5] absolute left-0"
+          onPress={() => {
+            router.navigate("/home")
+          }}
+      >
+        <Ionicons
+            name="chevron-back"
+            style={{
+              fontSize: 35, color: COLORS.cgrey
             }}
-        >
-          <Ionicons
-              name="chevron-back"
-              style={{
-                fontSize: 35, color: COLORS.cgrey
-              }}
-          />
-        </TouchableOpacity>
+        />
+      </TouchableOpacity>
 
-        <Text className="font-psemibold text-2xl text-white">
-          Mes voyages
-        </Text>
-      </View>
+      <Text className="font-psemibold text-2xl text-white">
+        Mes voyages
+      </Text>
     </View>
 
     <SegmentedButtons

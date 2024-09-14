@@ -124,7 +124,6 @@ export default function TravelCard({item}) {
                     console.log(1)
                   }}
                   className="flex-row items-center bg-brand px-3 rounded-3xl h-8"
-                  style={{alignItems: "center"}}
               >
 
                 <Text className="font-psemibold text-right text-white text-[12px]">
